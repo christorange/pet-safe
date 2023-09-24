@@ -1,0 +1,8 @@
+{
+  "name": "PetSafe",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "a314e42e"
+}
