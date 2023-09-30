@@ -3,6 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { FC } from 'react';
 
 const MainMap: FC = () => {
+
   return(
     <>
     <Map
@@ -13,8 +14,7 @@ const MainMap: FC = () => {
         zoom: 12
       }}
       mapStyle="mapbox://styles/mapbox/streets-v12"
-      mapboxAccessToken='pk.eyJ1IjoiY2hyaXN0b3JhbmdlIiwiYSI6ImNsbjUxMG9xbTAxanQyanA1MDNreDhubGQifQ.P8NylqgIRxbjGluqigXGKw'
-
+      mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
     >
 
     </Map>
