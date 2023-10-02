@@ -45,3 +45,5 @@ For the first time of development, if the simulator doesn't show up, run `npx ca
 Everytime the dependencies or capacitor configs are changed, run `npx cap sync ios` and `npx sync android`.
 
 You can also use the Ionic extension for these procedures.
+
+<img width="327" alt="image" src="https://github.com/christorange/pet-safe/assets/85213835/964f2f42-1ada-4957-b064-a0cc42317ffa">
