@@ -7,6 +7,7 @@ const MainMap: FC = () => {
   return(
     <>
       <Map
+        reuseMaps 
         initialViewState={{
           longitude: -71.0589,
           latitude: 42.3601,

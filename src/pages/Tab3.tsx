@@ -8,7 +8,7 @@ const Tab3: React.FC = () => {
           <p className='text-center font-bold'>Tab3</p>
         </IonToolbar>
       </IonHeader>
-      <div className='btn bg-purple-900 mb-4 w-20'>button</div>
+      <div className='btn mb-20 w-20 ml-5'>button</div>
     </IonPage>
   );
 };
