@@ -55,6 +55,7 @@ For the first time of development, if the simulator doesn't show up, run `npx ca
 
 Everytime the dependencies or capacitor configs are changed, run `npx cap sync`.
 
+After you run `api-export` on backend, run `npm run api-import` here to consume the updated API types.
 ## Commit guidelines
 
 Write your commit message in this way:
