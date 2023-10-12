@@ -1,5 +1,12 @@
 # pet-safe
 
+- [Ionic React](https://ionicframework.com/docs/react): Build mobile apps with React
+- [Vite](https://vitejs.dev/): Build tool
+- [TailwindCSS](https://tailwindcss.com/): CSS-in-JS framework, use [cheatsheet](https://tailwindcomponents.com/cheatsheet/) for classes quick lookup
+- [DaisyUI](https://daisyui.com/): UI library, works perferctly with TailwindCSS
+- [tRPC](https://trpc.io/docs/client/react): Type safe APIs in RPC protocol
+- [ReactQuery](https://tanstack.com/query/latest/docs/react/overview): hooks for http requests, integrated with tRPC
+- [react-map-gl](https://visgl.github.io/react-map-gl/): Map library, React wrapper on [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/guides/)
 ## Environment steup
 Follow [this guide](https://capacitorjs.com/docs/getting-started/environment-setup) for environemnt setup before development.
 
@@ -16,7 +23,6 @@ npm (or use pnpm) install -g @ionic/cli
 ```
 
 Last, install following VS Code extensions:
-- Ionic
 - Ionic Snippets
 - Tailwind CSS IntelliSense
 ## Development
@@ -28,6 +34,11 @@ Run `npx cap add ios` and `npx cap add android` before development. This will ge
 Create a `.env.local` file, define MapBox token as:
 ```
 VITE_MAPBOX_TOKEN = ...
+```
+Also add API urls:
+```
+VITE_DEV_API_URL = 'http://0.0.0.1:3475/trpc'
+VITE_PROD_API_URL = 'https://pet-safe.up.railway.app/trpc'
 ```
 
 Develop for ios:
@@ -44,6 +55,19 @@ For the first time of development, if the simulator doesn't show up, run `npx ca
 
 Everytime the dependencies or capacitor configs are changed, run `npx cap sync`.
 
-You can also use the Ionic extension for these procedures.
+## Commit guidelines
 
-<img width="327" alt="image" src="https://github.com/christorange/pet-safe/assets/85213835/964f2f42-1ada-4957-b064-a0cc42317ffa">
+Write your commit message in this way:
+
+**[type] ( [scope?] ): [description]**
+
+Types:
+- feat: A new feature
+- fix: A bug fix
+- refactor: A code change that neither fixes a bug nor adds a feature
+- doc: Documentation changes
+- build: Changes that affect the build system or external dependencies
+- chore: Other changes that don\'t modify src or test files
+- revert: Reverts a previous commit
+
+Scope: Optional, refers to the part of code changed in this commit.
