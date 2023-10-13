@@ -37,7 +37,7 @@ VITE_MAPBOX_TOKEN = ...
 ```
 Also add API urls:
 ```
-VITE_DEV_API_URL = 'http://0.0.0.1:3475/trpc'
+VITE_DEV_API_URL = 'http://0.0.0.0:3475/trpc'
 VITE_PROD_API_URL = 'https://pet-safe.up.railway.app/trpc'
 ```
 
