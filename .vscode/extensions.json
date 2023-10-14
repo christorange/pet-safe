@@ -1,5 +1,9 @@
 {
     "recommendations": [
-        "ionic.ionic"
+        "fivethree.vscode-ionic-snippets",
+        "bradlc.vscode-tailwindcss",
+        "ms-vscode.vscode-typescript-next",
+        "prisma.prisma",
+        "dbaeumer.vscode-eslint"
     ]
 }
