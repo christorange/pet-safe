@@ -9,7 +9,7 @@ const Tab2: React.FC = () => {
           <h3 className='text-center'>3D Building Map</h3>
         </IonToolbar>
       </IonHeader>
-      {/* <ThreeDMap /> */}
+      <ThreeDMap />
     </IonPage>
   );
 };

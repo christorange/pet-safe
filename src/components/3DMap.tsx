@@ -54,7 +54,7 @@ const ThreeDMap: FC = () => {
           width: '100vw',
           height: '100vh'
         }}
-        mapStyle="mapbox://styles/mapbox/streets-v12"
+        mapStyle="mapbox://styles/christorange/clnt6569c00e701qugxg8ffty"
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
       >
         <Layer {...buildingLayer}/>

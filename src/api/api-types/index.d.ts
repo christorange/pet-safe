@@ -1,25 +1,9 @@
+import * as geojson from 'geojson';
 import * as superjson from 'superjson';
 import * as _trpc_server from '@trpc/server';
 import * as fastify_types_type_provider from 'fastify/types/type-provider';
 import * as http from 'http';
 import * as fastify from 'fastify';
-
-interface IFeatures {
-    type: string;
-    geometry: {
-        type: string;
-        coordinates: number[];
-    };
-    properties: {
-        id?: number;
-        name: string;
-        address: string;
-    };
-}
-interface IGeojson {
-    type: string;
-    features: IFeatures[];
-}
 
 interface User {
     name: string[] | string;
@@ -151,7 +135,7 @@ declare const appRouter: _trpc_server.CreateRouterInner<_trpc_server.RootConfig<
             _output_in: typeof _trpc_server.unsetMarker;
             _output_out: typeof _trpc_server.unsetMarker;
             _meta: object;
-        }, IGeojson>;
+        }, geojson.FeatureCollection<geojson.Geometry, geojson.GeoJsonProperties>>;
     }>;
 }>;
 type AppRouter = typeof appRouter;
