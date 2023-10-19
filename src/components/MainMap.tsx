@@ -1,11 +1,11 @@
-import Map, { Source, Layer } from 'react-map-gl';
+import Map, { Source, Layer, GeolocateControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { FC, useState, useEffect } from 'react';
 import { trpc } from '../api';
 import type { CircleLayer } from 'react-map-gl';
 
-import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-import React from "react";
+// import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+// import React from "react";
 
 
 
@@ -24,33 +24,33 @@ const MainMap: FC = () => {
   }
   
   
-  const uLocationLayer: CircleLayer = {
-    id: 'uLocationLayer',
-    type: 'circle',
-    paint: {
-      'circle-radius': 10,
-      'circle-color': 'red',
-    },
-    source: 'uLocation', 
-  };
+  // const uLocationLayer: CircleLayer = {
+  //   id: 'uLocationLayer',
+  //   type: 'circle',
+  //   paint: {
+  //     'circle-radius': 10,
+  //     'circle-color': 'red',
+  //   },
+  //   source: 'uLocation', 
+  // };
 
 
 // Getting User's location
-const [position, setPosition] = useState<Geoposition | null>(null);
+// const [position, setPosition] = useState<Geoposition | null>(null);
 
-const getLocation = async () => {
-  try {
-    const currentPosition = await Geolocation.getCurrentPosition();
-    setPosition(currentPosition);
-  } catch (e) {
-    console.error(e);
-  }
-};
+// const getLocation = async () => {
+//   try {
+//     const currentPosition = await Geolocation.getCurrentPosition();
+//     setPosition(currentPosition);
+//   } catch (e) {
+//     console.error(e);
+//   }
+// };
 
-// Call getLocation when the component mounts using useEffect
-useEffect(() => {
-  getLocation();
-}, []);
+// // Call getLocation when the component mounts using useEffect
+// useEffect(() => {
+//   getLocation();
+// }, []);
 
   return(
     <>
@@ -58,8 +58,8 @@ useEffect(() => {
       {  allPlacesData &&
         <Map
           initialViewState={{
-            longitude: position ? parseFloat(`${position.coords.longitude}`) : -71.0589,
-            latitude: position ? parseFloat(`${position.coords.latitude}`) : 42.3601,
+            longitude:  -71.0589,
+            latitude:  42.3601,
             zoom: 12
           }}
           style={{
@@ -77,7 +77,7 @@ useEffect(() => {
             <Layer {...allPlacesLayer} />
           </Source>
 
-          {position && ( // Render the user's location only if it's available
+          {/* {position && ( // Render the user's location only if it's available
             <Source
               id="uLocation"
               type="geojson"
@@ -88,8 +88,8 @@ useEffect(() => {
             >
               <Layer {...uLocationLayer} />
             </Source>
-          )}
-
+          )} */}
+          <GeolocateControl  position='bottom-right'/>
         </Map>}
     </>
   )
