@@ -3,12 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { FC, useState, useEffect } from 'react';
 import { trpc } from '../api';
 import type { CircleLayer } from 'react-map-gl';
-
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-import React from "react";
-
-
-
 
 const MainMap: FC = () => {
 
