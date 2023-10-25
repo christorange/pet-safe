@@ -1,9 +1,9 @@
-import Map, { Source, Layer, useMap } from 'react-map-gl';
+import Map, { Source, Layer, useMap, GeolocateControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { FC, useState, useEffect } from 'react';
 import { trpc } from '../api';
 import type { CircleLayer } from 'react-map-gl';
-import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+
 
 const MainMap: FC = () => {
 
@@ -19,34 +19,6 @@ const MainMap: FC = () => {
     source: 'allPlaces'
   }
   
-  
-  const uLocationLayer: CircleLayer = {
-    id: 'uLocationLayer',
-    type: 'circle',
-    paint: {
-      'circle-radius': 10,
-      'circle-color': 'red',
-    },
-    source: 'uLocation', 
-  };
-
-
-// Getting User's location
-const [position, setPosition] = useState<Geoposition | null>(null);
-
-const getLocation = async () => {
-  try {
-    const currentPosition = await Geolocation.getCurrentPosition();
-    setPosition(currentPosition);
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-// Call getLocation when the component mounts using useEffect
-useEffect(() => {
-  getLocation();
-}, []);
 
   return(
     <>
@@ -54,15 +26,15 @@ useEffect(() => {
       { allPlacesData &&
         <Map
           initialViewState={{
-            longitude: position ? parseFloat(`${position.coords.longitude}`) : -71.0589,
-            latitude: position ? parseFloat(`${position.coords.latitude}`) : 42.3601,
+            longitude:  -71.0589,
+            latitude:  42.3601,
             zoom: 12
           }}
           style={{
             width: '100vw',
             height: '100vh'
           }}
-          mapStyle="mapbox://styles/christorange/clnt6569c00e701qugxg8ffty"
+          mapStyle="mapbox://styles/christorange/clnt6653300d601qj6z456rlx"
           mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         >
           <div className='relative top-8 mx-5'>
@@ -84,19 +56,7 @@ useEffect(() => {
             <Layer {...allPlacesLayer} />
           </Source>
 
-          {position && ( // Render the user's location only if it's available
-            <Source
-              id="uLocation"
-              type="geojson"
-              data={{
-                type: 'Point',
-                coordinates: [position.coords.longitude, position.coords.latitude],
-              }}
-            >
-              <Layer {...uLocationLayer} />
-            </Source>
-          )}
-
+          <GeolocateControl  position='bottom-right'/>
         </Map>}
     </>
   )
