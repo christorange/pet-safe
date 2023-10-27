@@ -1,6 +1,6 @@
 import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 
 const login: React.FC = () => {
 
@@ -29,6 +29,9 @@ const login: React.FC = () => {
         />
 
         <IonButton onClick={(loginUser)}>Login</IonButton>
+        <p>
+            New Here?  <Link to="/register">register</Link>
+        </p>
       </IonContent>
       
     </IonPage>
