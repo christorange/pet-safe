@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import MainDrawer from '../components/Drawer';
 const Tab3: React.FC = () => {
 
@@ -6,10 +6,13 @@ const Tab3: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <p className='text-center font-bold'>Tab3</p>
-        </IonToolbar>
+          <p className='text-center font-bold'>Login</p>
+        </IonToolbar> 
       </IonHeader>
-      <div className='btn mb-20 w-20 ml-5'>button</div>
+      <IonContent className='ion-padding'>
+          <IonButton routerLink='login'>Login</IonButton>
+          <IonButton routerLink='Register' color='secondary'>Register</IonButton>
+      </IonContent>
       <MainDrawer />
     </IonPage>
   );

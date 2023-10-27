@@ -18,6 +18,9 @@ import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 
+import Login from './pages/LoginREG/login';
+import Register from './pages/LoginREG/Register';
+
 import './styles/global.css';
 
 /* Core CSS required for Ionic components to work properly */
@@ -61,6 +64,11 @@ const App: React.FC = () => (
                 <Route exact path="/">
                   <Redirect to="/tab1" />
                 </Route>
+
+                {/* login route And register route */}
+                <Route path="/login" component={Login}/>
+                <Route path="/register" component={Register}/>
+                
               </IonRouterOutlet>
               <IonTabBar slot="bottom">
                 <IonTabButton tab="tab1" href="/tab1">
