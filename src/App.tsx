@@ -18,7 +18,7 @@ import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 
-import Login from './pages/LoginREG/login';
+import Login from './pages/LoginREG/Login';
 import Register from './pages/LoginREG/Register';
 
 import './styles/global.css';

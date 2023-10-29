@@ -25,10 +25,12 @@ const register: React.FC = () => {
             onIonChange={(e: any) => setUsername(e.target.value)} 
         />
         <IonInput 
+            type='password'
             placeholder='Password?' 
             onIonChange={(e: any) => setPassword(e.target.value)}
         />
         <IonInput 
+            type='password'
             placeholder='Confirm Password?' 
             onIonChange={(e: any) => setPassword(e.target.value)}
         />
