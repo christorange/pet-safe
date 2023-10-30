@@ -1710,7 +1710,7 @@ packages:
     peerDependencies:
       rxjs: ^5.5.0 || ^6.5.0
     dependencies:
-      '@types/cordova': 11.0.1
+      '@types/cordova': 11.0.2
       rxjs: 6.6.7
     dev: false
 
@@ -1721,7 +1721,7 @@ packages:
       rxjs: ^5.5.0 || ^6.5.0
     dependencies:
       '@ionic-native/core': 5.36.0(rxjs@6.6.7)
-      '@types/cordova': 11.0.1
+      '@types/cordova': 11.0.2
       rxjs: 6.6.7
     dev: false
 
@@ -2607,8 +2607,8 @@ packages:
     resolution: {integrity: sha512-VOVRLM1mBxIRxydiViqPcKn6MIxZytrbMpd6RJLIWKxUNr3zux8no0Oc7kJx0WAPIitgZ0gkrDS+btlqQpubpw==}
     dev: true
 
-  /@types/cordova@11.0.1:
-    resolution: {integrity: sha512-Zd6LAhYUAdn0mL0SbxHeF4fO/3uzkcW3fzE0ZIK1wDlTRCWlI4/0i+Phb+otP9ryziyeW2LKofRNSP5yil85hA==}
+  /@types/cordova@11.0.2:
+    resolution: {integrity: sha512-swXLtFffXPQYz80eEX4URII7obHBZCS01JtI2Fh0Gt6dxgwoyDB7ZzfkRZgHHDxl1qRdMVRICMvfx2USIHPWCA==}
     dev: false
 
   /@types/fs-extra@8.1.3:
