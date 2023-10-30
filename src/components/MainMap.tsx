@@ -1,11 +1,48 @@
-import Map, { Source, Layer, useMap, GeolocateControl } from 'react-map-gl';
+import Map, { Source, Layer, GeolocateControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { FC, useState, useEffect, useRef, useCallback } from 'react';
+import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
-import type { CircleLayer, SymbolLayer, MapRef } from 'react-map-gl';
-
+import type { SymbolLayer, MapRef } from 'react-map-gl';
+import { BarIcon } from '@/assets/icons/BarIcon';
+import { RestaurantIcon } from '@/assets/icons/RestaurantIcon';
+import { CafeIcon } from '@/assets/icons/CafeIcon';
+import { ParkIcon } from '@/assets/icons/ParkIcon';
 
 const MainMap: FC = () => {
+  
+  const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all')
+
+  const handleCafeFilter = useCallback(() => {
+    if (placeType === 'cafes'){
+      setPlaceType('all')
+    }else {
+      setPlaceType('cafes')
+    }
+  }, [placeType])
+
+  const handleRestaurantFilter = useCallback(() => {
+    if (placeType === 'restaurants'){
+      setPlaceType('all')
+    }else {
+      setPlaceType('restaurants')
+    }
+  }, [placeType])
+
+  const handleBarFilter = useCallback(() => {
+    if (placeType === 'bars'){
+      setPlaceType('all')
+    }else {
+      setPlaceType('bars')
+    }
+  }, [placeType])
+
+  const handleParkFilter = useCallback(() => {
+    if (placeType === 'parks'){
+      setPlaceType('all')
+    }else {
+      setPlaceType('parks')
+    }
+  }, [placeType])
 
   // const {data: allPlacesData, isLoading, isFetched} = trpc.places.allPlaces.useQuery()
   const {
@@ -34,65 +71,65 @@ const MainMap: FC = () => {
   const mapOnLoad = useCallback(()=>{
     if (mapRef.current){
       const map = mapRef.current.getMap();
-
+      map.resize();
       if(!map.hasImage('barIcon')){
-        map.loadImage('../assets/bar-icon.png', (error, image) => {
+        map.loadImage('src/assets/bar-icon.png', (error, image) => {
           if (error || !image) throw error;
-          map.addImage('barIcon', image, {sdf: true});
+          map.addImage('barIcon', image, {sdf: false});
         })
       }
 
       if (!map.hasImage('restaurantIcon')){
-        // map.loadImage('../assets/restaurant-icon.png', (error, image) => {
-        //   if (error || !image) throw error;
-        //   map.addImage('restaurantIcon', image, {sdf: true});
-        // })
+        map.loadImage('src/assets/restaurant-icon.png', (error, image) => {
+          if (error || !image) throw error;
+          map.addImage('restaurantIcon', image, {sdf: false});
+        })
 
-        let img = new Image(10,10);
-        img.crossOrigin = 'Anonymous';
-        img.onload = ()=> {
-          // if (map.hasImage('restaurantIcon')) return;
-          map.addImage('restaurantIcon', img);
-        }
-        img.src = '../assets/restaurant-icon.png';
+        // let img = new Image(20,20);
+        // img.crossOrigin = 'Anonymous';
+        // img.src = 'src/assets/restaurant-icon.png';
+        // img.onload = ()=> {
+        //   map.addImage('restaurantIcon', img);
+        // }
       }
 
       if (!map.hasImage('cafeIcon')){
-        map.loadImage('../assets/cafe-icon.png', (error, image) => {
+        map.loadImage('src/assets/cafe-icon.png', (error, image) => {
           if (error || !image) throw error;
-          map.addImage('cafeIcon', image, {sdf: true});
+          map.addImage('cafeIcon', image, {sdf: false});
         })
       }
 
       if (!map.hasImage('parkIcon')){
-        map.loadImage('../assets/park-icon.png', (error, image) => {
+        map.loadImage('src/assets/park-icon.png', (error, image) => {
           if (error || !image) throw error;
-          map.addImage('parkIcon', image, {sdf: true});
+          map.addImage('parkIcon', image, {sdf: false});
         })
       }
       
     }
   },[])
 
-  const allPlacesLayer: CircleLayer = {
-    id: 'allPlacesLayer',
-    type: 'circle',
-    paint: {
-      'circle-radius': 7,
-      'circle-color': '#835dd3'
-    },
-    source: 'allPlaces'
-  }
+  // const allPlacesLayer: CircleLayer = {
+  //   id: 'allPlacesLayer',
+  //   type: 'circle',
+  //   paint: {
+  //     'circle-radius': 7,
+  //     'circle-color': '#835dd3'
+  //   },
+  //   source: 'allPlaces'
+  // }
 
   const barLayer: SymbolLayer = {
     id: 'barLayer',
     type: 'symbol',
     layout: {
       'icon-image': 'barIcon',
-      'icon-size': 1,
+      'icon-size': 0.5,
       'icon-allow-overlap': true,
       'text-field': '{name}',
-      'text-size': 11
+      'text-size': 11,
+      'text-offset': [0, 2],
     },
     source: 'bars'
   }
@@ -102,10 +139,11 @@ const MainMap: FC = () => {
     type: 'symbol',
     layout: {
       'icon-image': 'restaurantIcon',
-      'icon-size': 1,
+      'icon-size': 0.5,
       'icon-allow-overlap': true,
       'text-field': '{name}',
-      'text-size': 11
+      'text-size': 11,
+      'text-offset': [0, 2],
     },
     source: 'restaurants'
   }
@@ -115,10 +153,11 @@ const MainMap: FC = () => {
     type: 'symbol',
     layout: {
       'icon-image': 'cafeIcon',
-      'icon-size': 1,
+      'icon-size': 0.5,
       'icon-allow-overlap': true,
       'text-field': '{name}',
-      'text-size': 11
+      'text-size': 11,
+      'text-offset': [0, 2],
     },
     source: 'cafes'
   }
@@ -128,10 +167,11 @@ const MainMap: FC = () => {
     type: 'symbol',
     layout: {
       'icon-image': 'parkIcon',
-      'icon-size': 1,
+      'icon-size': 0.5,
       'icon-allow-overlap': true,
       'text-field': '{name}',
-      'text-size': 11
+      'text-size': 11,
+      'text-offset': [0, 2],
     },
     source: 'parks'
   }
@@ -165,42 +205,62 @@ const MainMap: FC = () => {
             </svg>
           </button>
         </div>
+        
+        <div className='absolute right-8 bottom-5 flex flex-col gap-2'>
+          <CafeIcon onClick={handleCafeFilter}/>
+          <RestaurantIcon onClick={handleRestaurantFilter} />
+          <BarIcon onClick={handleBarFilter}/>
+          <ParkIcon onClick={handleParkFilter} />
+        </div>
+
         {
           isBarsLoading && isCafesLoading && isRestaurantsLoading && isParksLoading && 
           <div className='w-full h-full bg-black bg-opacity-50 grid place-items-center'>
             <span className="loading loading-dots loading-lg m-auto"></span>
           </div>
         }
-        {barsData && <Source
-          id='bars'
-          type='geojson'
-          data={barsData}
-        >
-          <Layer {...barLayer} />
-        </Source>}
-        {restaurantsData && <Source
-          id='restaurants'
-          type='geojson'
-          data={restaurantsData}
-        >
-          <Layer {...restaurantLayer} />
-        </Source>}
-        {cafesData && <Source
-          id='cafes'
-          type='geojson'
-          data={cafesData}
-        >
-          <Layer {...cafeLayer} />
-        </Source>}
-        {parksData && <Source
-          id='parks'
-          type='geojson'
-          data={parksData}
-        >
-          <Layer {...parkLayer} />
-        </Source>}
+        {
+          barsData && (placeType === 'all' || placeType === 'bars') && 
+          <Source
+            id='bars'
+            type='geojson'
+            data={barsData}
+          >
+            <Layer {...barLayer} />
+          </Source>
+        }
+        {
+          restaurantsData && (placeType === 'all' || placeType === 'restaurants') &&
+          <Source
+            id='restaurants'
+            type='geojson'
+            data={restaurantsData}
+          >
+            <Layer {...restaurantLayer} />
+          </Source>
+        }
+        {
+          cafesData && (placeType === 'all' || placeType === 'cafes') &&
+          <Source
+            id='cafes'
+            type='geojson'
+            data={cafesData}
+          >
+            <Layer {...cafeLayer} />
+          </Source>
+        }
+        {
+          parksData && (placeType === 'all' || placeType === 'parks') &&
+          <Source
+            id='parks'
+            type='geojson'
+            data={parksData}
+          >
+            <Layer {...parkLayer} />
+          </Source>
+        }
 
-        <GeolocateControl  position='bottom-right'/>
+        <GeolocateControl  position='bottom-left'/>
       </Map>
     </>
   )
