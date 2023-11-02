@@ -11,37 +11,42 @@ import {
   ClerkProvider,
   SignedIn,
   SignedOut,
+  SignOutButton,
   UserButton,
   useUser,
   RedirectToSignIn,
+  useAuth
 } from "@clerk/clerk-react"; // Import ClerkProvider here
 
-import Dashboard from './Dashboard';
 
 
-const Tab3: React.FC = () => {
+const Dashboard: React.FC = () => {
   
 
   return (
-    <ClerkProvider publishableKey={import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY}>
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <p className='text-center font-bold'>Tab3</p>
+            <p className='text-center font-bold'>DashBoard</p>
           </IonToolbar>
         </IonHeader>
+        <Welcome />
+        <SignOutButton />
         <MainDrawer />
-          <SignedIn>
-            <Dashboard />
-          </SignedIn>
-          <SignedOut>
-            <RedirectToSignIn />
-            <p className='text-center font-bold'>You are Signed Out</p>
-          </SignedOut>
       </IonPage>
-    </ClerkProvider>
   );
 };
 
+function Welcome() {
+  
 
-export default Tab3;
+  const { isLoaded, isSignedIn, user } = useUser();
+  const { userId, sessionId, getToken } = useAuth();
+  
+  if (!isLoaded || !userId || !user) {
+    return null;
+  }
+  return <div className=' background'>Hello {user.firstName}, you are signed in</div>;
+}
+
+export default Dashboard;
