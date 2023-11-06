@@ -1,5 +1,4 @@
 import Map, { Source, Layer, GeolocateControl } from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
 import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
@@ -7,7 +6,8 @@ import { BarIcon } from '@/assets/icons/BarIcon';
 import { RestaurantIcon } from '@/assets/icons/RestaurantIcon';
 import { CafeIcon } from '@/assets/icons/CafeIcon';
 import { ParkIcon } from '@/assets/icons/ParkIcon';
-import { MagicMotion } from 'react-magic-motion';
+
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface IPopupInfo {
   latitude: number;
