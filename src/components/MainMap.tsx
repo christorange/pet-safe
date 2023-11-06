@@ -1,17 +1,26 @@
 import Map, { Source, Layer, GeolocateControl } from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
-import type { SymbolLayer, MapRef } from 'react-map-gl';
+import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
 import { BarIcon } from '@/assets/icons/BarIcon';
 import { RestaurantIcon } from '@/assets/icons/RestaurantIcon';
 import { CafeIcon } from '@/assets/icons/CafeIcon';
 import { ParkIcon } from '@/assets/icons/ParkIcon';
 
+import 'mapbox-gl/dist/mapbox-gl.css';
+
+interface IPopupInfo {
+  latitude: number;
+  longitude: number;
+  name: string;
+  type: string;
+}
+
 const MainMap: FC = () => {
   
   const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all')
-
+  const [popupInfo, setPopupInfo] = useState<IPopupInfo | null>(null)
+  
   const handleCafeFilter = useCallback(() => {
     if (placeType === 'cafes'){
       setPlaceType('all')
@@ -110,6 +119,19 @@ const MainMap: FC = () => {
     }
   },[])
 
+  const mapOnClick = useCallback((e: MapLayerMouseEvent) => {
+    e.preventDefault();
+    e.originalEvent.stopPropagation();
+    const place = e.features && e.features[0];
+    setPopupInfo({  
+      longitude: e.lngLat.lng,
+      latitude: e.lngLat.lat,
+      name: place?.properties?.name,
+      type: place?.properties?.type
+    })
+    console.log(popupInfo)
+  },[popupInfo])
+
   // const allPlacesLayer: CircleLayer = {
   //   id: 'allPlacesLayer',
   //   type: 'circle',
@@ -125,13 +147,14 @@ const MainMap: FC = () => {
     type: 'symbol',
     layout: {
       'icon-image': 'barIcon',
-      'icon-size': 0.5,
+      'icon-size': 0.7,
       'icon-allow-overlap': true,
       'text-field': '{name}',
       'text-size': 11,
-      'text-offset': [0, 2],
+      'text-offset': [0, 2.5],
     },
-    source: 'bars'
+    source: 'bars',
+    interactive: true
   }
 
   const restaurantLayer: SymbolLayer = {
@@ -139,13 +162,14 @@ const MainMap: FC = () => {
     type: 'symbol',
     layout: {
       'icon-image': 'restaurantIcon',
-      'icon-size': 0.5,
-      'icon-allow-overlap': true,
+      'icon-size': 0.7,
+      'icon-allow-overlap': true,      
       'text-field': '{name}',
       'text-size': 11,
-      'text-offset': [0, 2],
+      'text-offset': [0, 2.5],
     },
-    source: 'restaurants'
+    source: 'restaurants',
+    interactive: true
   }
 
   const cafeLayer: SymbolLayer = {
@@ -153,13 +177,14 @@ const MainMap: FC = () => {
     type: 'symbol',
     layout: {
       'icon-image': 'cafeIcon',
-      'icon-size': 0.5,
+      'icon-size': 0.7,
       'icon-allow-overlap': true,
       'text-field': '{name}',
       'text-size': 11,
-      'text-offset': [0, 2],
+      'text-offset': [0, 2.5],
     },
-    source: 'cafes'
+    source: 'cafes',
+    interactive: true
   }
 
   const parkLayer: SymbolLayer = {
@@ -167,19 +192,21 @@ const MainMap: FC = () => {
     type: 'symbol',
     layout: {
       'icon-image': 'parkIcon',
-      'icon-size': 0.5,
+      'icon-size': 0.7,
       'icon-allow-overlap': true,
       'text-field': '{name}',
       'text-size': 11,
-      'text-offset': [0, 2],
+      'text-offset': [0, 2.5]
     },
-    source: 'parks'
+    source: 'parks',
+    interactive: true
   }
   
 
   return(
     <>
       <Map
+        reuseMaps
         initialViewState={{
           longitude:  -71.0589,
           latitude:  42.3601,
@@ -189,15 +216,18 @@ const MainMap: FC = () => {
           width: '100vw',
           height: '100vh'
         }}
-        mapStyle="mapbox://styles/christorange/clnt66of200dv01qmb9axft65"
+        mapStyle="mapbox://styles/christorange/clnt6653300d601qj6z456rlx"
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         ref={mapRef}
         onLoad={()=>mapOnLoad()}
+        onClick={mapOnClick}
+        interactiveLayerIds={['barLayer', 'restaurantLayer', 'cafeLayer', 'parkLayer']}
       >
-        <div className='relative top-16 mx-5'>
+        <div className='relative top-16 mx-5 text-text margi'>
           <input
             type='text'
-            className='w-full rounded-full bg-brand border-none focus:outline-brand-200 py-2.5 text-sm ps-12'
+            placeholder='Search for pet friendly places'
+            className='w-full rounded-full bg-brand border-brand-200 border-2 border-opacity-50 focus:outline-brand-200 focus:border-none py-2.5 ps-12'
           />
           <button type='button' className='absolute inset-y-0 start-0 text-text w-12 place-content-center grid'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
@@ -258,6 +288,34 @@ const MainMap: FC = () => {
           >
             <Layer {...parkLayer} />
           </Source>
+        }
+        {
+          popupInfo?.name && 
+            <Popup 
+              longitude={popupInfo.longitude} 
+              latitude={popupInfo.latitude}
+              anchor='bottom'
+              onClose={()=>setPopupInfo(null)}
+              closeOnClick={false}
+              closeButton={false}
+              >
+              <div className='text-brand2-200 text-center'>
+                <p className='mb-2 font-bold text-base'>
+                  {popupInfo.name}
+                </p>
+                <div className='mb-3 text-sm flex gap-2 justify-center'>
+                  <p>
+                    {popupInfo.type}
+                  </p>
+                  <p>
+                    4.7/5.0
+                  </p>
+                </div>
+                <button className='btn-sm rounded-lg bg-brand2 text-text-100'>
+                  OPEN
+                </button>
+              </div>
+            </Popup>
         }
 
         <GeolocateControl  position='bottom-left'/>

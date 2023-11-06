@@ -6,3 +6,12 @@
 body{
   font-family: 'Quicksand', sans-serif;
 }
+
+.mapboxgl-popup-tip{
+  border-top-color: #c1b3e9 !important;
+  @apply shadow-2xl;
+}
+
+.mapboxgl-popup-content{
+  @apply bg-brand2-100 rounded-lg shadow-2xl;
+}

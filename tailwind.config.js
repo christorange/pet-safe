@@ -16,6 +16,25 @@ export default {
           100: '#c1b3e9',
           200: '#5b4c99',
           DEFAULT: '#5b4c99'
+        },
+        text: {
+          100: '#D0CAB5',
+          200: '#505433',
+          DEFAULT: '#505433'
+        },
+        pink: '#ffcadc',
+        park: {
+          100: '#46c1dc',
+          200: '#1e6e80',
+          DEFAULT: '#46c1dc'
+        },
+        background: {
+          100: '#fefced',
+          200: '#141411'
+        },
+        error: {
+          100: '#fb4b88',
+          200: '#ff264e'
         }
       }
     },
