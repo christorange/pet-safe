@@ -13,6 +13,7 @@ interface IPopupInfo {
   latitude: number;
   longitude: number;
   name: string;
+  type: string;
 }
 
 const MainMap: FC = () => {
@@ -125,7 +126,8 @@ const MainMap: FC = () => {
     setPopupInfo({  
       longitude: e.lngLat.lng,
       latitude: e.lngLat.lat,
-      name: place?.properties?.name
+      name: place?.properties?.name,
+      type: place?.properties?.type
     })
     console.log(popupInfo)
   },[popupInfo])
@@ -297,10 +299,18 @@ const MainMap: FC = () => {
               closeOnClick={false}
               closeButton={false}
               >
-              <div className='text-brand2-200 flex flex-col justify-center'>
-                <p className='mb-2 font-bold text-base text-center'>
+              <div className='text-brand2-200 text-center'>
+                <p className='mb-2 font-bold text-base'>
                   {popupInfo.name}
                 </p>
+                <div className='mb-3 text-sm flex gap-2 justify-center'>
+                  <p>
+                    {popupInfo.type}
+                  </p>
+                  <p>
+                    4.7/5.0
+                  </p>
+                </div>
                 <button className='btn-sm rounded-lg bg-brand2 text-text-100'>
                   OPEN
                 </button>
