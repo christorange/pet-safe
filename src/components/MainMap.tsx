@@ -6,7 +6,10 @@ import { BarIcon } from '@/assets/icons/BarIcon';
 import { RestaurantIcon } from '@/assets/icons/RestaurantIcon';
 import { CafeIcon } from '@/assets/icons/CafeIcon';
 import { ParkIcon } from '@/assets/icons/ParkIcon';
-
+import { HeartICon } from '@/assets/icons/HeartIcon';
+import { UserIcon } from '@/assets/icons/UserIcon';
+import { FilterIcon } from '@/assets/icons/FilterIcon';
+import { HTMLAttributes } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface IPopupInfo {
@@ -20,7 +23,8 @@ const MainMap: FC = () => {
   
   const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all')
   const [popupInfo, setPopupInfo] = useState<IPopupInfo | null>(null)
-  
+  const [showFilter, setShowFilter] = useState<boolean>(false)
+
   const handleCafeFilter = useCallback(() => {
     if (placeType === 'cafes'){
       setPlaceType('all')
@@ -52,6 +56,10 @@ const MainMap: FC = () => {
       setPlaceType('parks')
     }
   }, [placeType])
+
+  const toggleShowFilter = useCallback(() => {
+    setShowFilter((prev) => !prev)
+  }, [])
 
   // const {data: allPlacesData, isLoading, isFetched} = trpc.places.allPlaces.useQuery()
   const {
@@ -236,12 +244,14 @@ const MainMap: FC = () => {
           </button>
         </div>
         
-        <div className='absolute right-8 bottom-5 flex flex-col gap-2'>
-          <CafeIcon onClick={handleCafeFilter}/>
-          <RestaurantIcon onClick={handleRestaurantFilter} />
-          <BarIcon onClick={handleBarFilter}/>
-          <ParkIcon onClick={handleParkFilter} />
-        </div>
+        {showFilter &&
+          <div className='absolute right-8 bottom-24 flex flex-col gap-2'>
+            <CafeIcon onClick={handleCafeFilter}/>
+            <RestaurantIcon onClick={handleRestaurantFilter} />
+            <BarIcon onClick={handleBarFilter}/>
+            <ParkIcon onClick={handleParkFilter} />
+          </div>
+        }
 
         {
           isBarsLoading && isCafesLoading && isRestaurantsLoading && isParksLoading && 
@@ -317,7 +327,18 @@ const MainMap: FC = () => {
               </div>
             </Popup>
         }
-
+        <ul className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
+          h-16 rounded-full text-3xl text-text shadow-2xl'>
+          <li>
+            <HeartICon />
+          </li>
+          <li>
+            <UserIcon />
+          </li>
+          <li>
+            <FilterIcon onClick={toggleShowFilter}/>
+          </li>
+        </ul>
         <GeolocateControl  position='bottom-left'/>
       </Map>
     </>
