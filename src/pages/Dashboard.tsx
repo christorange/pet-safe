@@ -17,7 +17,7 @@ import {
   RedirectToSignIn,
   useAuth
 } from "@clerk/clerk-react"; // Import ClerkProvider here
-
+import '../styles/ppage.css';
 
 
 const Dashboard: React.FC = () => {
@@ -46,7 +46,20 @@ function Welcome() {
   if (!isLoaded || !userId || !user) {
     return null;
   }
-  return <div className=' background'>Hello {user.firstName}, you are signed in</div>;
+
+  const userPic = user.imageUrl;
+
+  return (
+    <div className="profile-container">
+      <div className="user-header">
+        <div className="user-name">{user.firstName}</div>
+      </div>
+      <div className="user-info">
+        <img className="profile-picture" src={userPic} alt="Profile Picture" />
+        <div className="profile-description">Saved</div>
+      </div>
+    </div>
+  );
 }
 
 export default Dashboard;

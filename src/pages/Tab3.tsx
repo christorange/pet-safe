@@ -17,6 +17,7 @@ import {
 } from "@clerk/clerk-react"; // Import ClerkProvider here
 
 import Dashboard from './Dashboard';
+import Tab1 from './Tab1';
 
 
 const Tab3: React.FC = () => {
@@ -24,13 +25,12 @@ const Tab3: React.FC = () => {
 
   return (
     <ClerkProvider publishableKey={import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY}>
-      <IonPage>
+      <IonPage className=' bg-background'>
         <IonHeader>
           <IonToolbar>
             <p className='text-center font-bold'>Tab3</p>
           </IonToolbar>
         </IonHeader>
-        <MainDrawer />
           <SignedIn>
             <Dashboard />
           </SignedIn>
