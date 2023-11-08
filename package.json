@@ -31,6 +31,7 @@
     "@trpc/client": "^10.40.0",
     "@trpc/react-query": "^10.40.0",
     "@trpc/server": "^10.40.0",
+    "clsx": "^2.0.0",
     "cordova-plugin-geolocation": "^5.0.0",
     "ionicons": "^7.0.0",
     "mapbox-gl": "^2.15.0",

@@ -9,7 +9,8 @@ import { ParkIcon } from '@/assets/icons/ParkIcon';
 import { HeartICon } from '@/assets/icons/HeartIcon';
 import { UserIcon } from '@/assets/icons/UserIcon';
 import { FilterIcon } from '@/assets/icons/FilterIcon';
-import { HTMLAttributes } from 'react';
+import {clsx} from 'clsx';
+
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface IPopupInfo {
@@ -235,7 +236,8 @@ const MainMap: FC = () => {
           <input
             type='text'
             placeholder='Search for pet friendly places'
-            className='w-full rounded-full bg-brand border-brand-200 border-2 border-opacity-50 focus:outline-brand-200 focus:border-none py-2.5 ps-12'
+            className='accent-brand-200 w-full rounded-full bg-brand border-brand-200 border-2 border-opacity-30 
+              focus:shadow-2xl focus:ring-0 focus:border-brand-200 focus:border-opacity-70 py-2.5 ps-12 transition-all '
           />
           <button type='button' className='absolute inset-y-0 start-0 text-text w-12 place-content-center grid'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
@@ -327,18 +329,30 @@ const MainMap: FC = () => {
               </div>
             </Popup>
         }
-        <ul className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
-          h-16 rounded-full text-3xl text-text shadow-2xl'>
-          <li>
-            <HeartICon />
-          </li>
-          <li>
-            <UserIcon />
-          </li>
-          <li>
-            <FilterIcon onClick={toggleShowFilter}/>
-          </li>
-        </ul>
+        <div className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
+          h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
+          <button
+            className='grid place-items-center
+            active:scale-125 transition ease-in-out duration-200'
+          >
+            <HeartICon strokeWidth='1.8'/>
+          </button>
+          <button
+            className='grid place-items-center
+            active:scale-125 transition ease-in-out duration-200'
+          >
+            <UserIcon strokeWidth='1.8'/>
+          </button>
+          <button
+            onClick={toggleShowFilter}
+            className={clsx(
+              'grid place-items-center active:scale-125 transition ease-in-out duration-200',
+              showFilter && 'rotate-90'
+            )}
+          >
+            <FilterIcon />
+          </button>
+        </div>
         <GeolocateControl  position='bottom-left'/>
       </Map>
     </>
