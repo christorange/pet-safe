@@ -2,6 +2,7 @@ import Map, { Source, Layer, GeolocateControl } from 'react-map-gl';
 import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
 import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BarIcon } from '@/assets/icons/BarIcon';
 import { RestaurantIcon } from '@/assets/icons/RestaurantIcon';
 import { CafeIcon } from '@/assets/icons/CafeIcon';
@@ -246,14 +247,52 @@ const MainMap: FC = () => {
           </button>
         </div>
         
-        {showFilter &&
-          <div className='absolute right-8 bottom-24 flex flex-col gap-2'>
-            <CafeIcon onClick={handleCafeFilter}/>
-            <RestaurantIcon onClick={handleRestaurantFilter} />
-            <BarIcon onClick={handleBarFilter}/>
-            <ParkIcon onClick={handleParkFilter} />
-          </div>
-        }
+        <AnimatePresence>
+          {showFilter &&
+            <div className='absolute right-8 bottom-24 flex flex-col gap-2'>
+              <motion.div
+                initial={{scale:0}}
+                animate={{scale:1}}
+                exit={{scale:0}}
+              >
+                <CafeIcon 
+                  onClick={handleCafeFilter}
+                  className='active:scale-125 transition'
+                />
+              </motion.div>
+              <motion.div
+                initial={{scale:0}}
+                animate={{scale:1}}
+                exit={{scale:0}}
+              >
+                <RestaurantIcon 
+                  onClick={handleRestaurantFilter} 
+                  className='active:scale-125 transition'
+                />
+              </motion.div>
+              <motion.div
+                initial={{scale:0}}
+                animate={{scale:1}}
+                exit={{scale:0}}
+              >
+                <BarIcon 
+                  onClick={handleBarFilter}
+                  className='active:scale-125 transition'
+                />
+              </motion.div>
+              <motion.div
+                initial={{scale:0}}
+                animate={{scale:1}}
+                exit={{scale:0}}
+              >
+                <ParkIcon 
+                  onClick={handleParkFilter} 
+                  className='active:scale-125 transition'
+                />
+              </motion.div>
+            </div>
+          }
+        </AnimatePresence>
 
         {
           isBarsLoading && isCafesLoading && isRestaurantsLoading && isParksLoading && 
@@ -301,34 +340,40 @@ const MainMap: FC = () => {
             <Layer {...parkLayer} />
           </Source>
         }
-        {
-          popupInfo?.name && 
-            <Popup 
-              longitude={popupInfo.longitude} 
-              latitude={popupInfo.latitude}
-              anchor='bottom'
-              onClose={()=>setPopupInfo(null)}
-              closeOnClick={false}
-              closeButton={false}
+        <AnimatePresence>
+          {
+            popupInfo?.name &&
+              <Popup 
+                longitude={popupInfo.longitude} 
+                latitude={popupInfo.latitude}
+                anchor='bottom'
+                onClose={()=>setPopupInfo(null)}
+                closeOnClick={false}
+                closeButton={false}
               >
-              <div className='text-brand2-200 text-center'>
-                <p className='mb-2 font-bold text-base'>
-                  {popupInfo.name}
-                </p>
-                <div className='mb-3 text-sm flex gap-2 justify-center'>
-                  <p>
-                    {popupInfo.type}
+                <motion.div 
+                  initial={{opacity:0, y:8}}
+                  animate={{opacity:1, y:0}}
+                  exit={{opacity:0, y:8}}
+                  className='text-brand2-200 text-center'>
+                  <p className='mb-2 font-bold text-base'>
+                    {popupInfo.name}
                   </p>
-                  <p>
-                    4.7/5.0
-                  </p>
-                </div>
-                <button className='btn-sm rounded-lg bg-brand2 text-text-100'>
-                  OPEN
-                </button>
-              </div>
-            </Popup>
-        }
+                  <div className='mb-3 text-sm flex gap-2 justify-center'>
+                    <p>
+                      {popupInfo.type}
+                    </p>
+                    <p>
+                      4.7/5.0
+                    </p>
+                  </div>
+                  <button className='btn-sm rounded-lg bg-brand2 text-text-100'>
+                    OPEN
+                  </button>
+                </motion.div>
+              </Popup>
+          }
+        </AnimatePresence>
         <div className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
           h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
           <button
@@ -350,7 +395,7 @@ const MainMap: FC = () => {
               showFilter && 'rotate-90'
             )}
           >
-            <FilterIcon />
+            <FilterIcon strokeWidth='1.8'/>
           </button>
         </div>
         <GeolocateControl  position='bottom-left'/>
