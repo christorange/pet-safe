@@ -2,6 +2,7 @@ import Map, { Source, Layer, GeolocateControl } from 'react-map-gl';
 import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
 import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BarIcon } from '@/assets/icons/BarIcon';
 import { RestaurantIcon } from '@/assets/icons/RestaurantIcon';
 import { CafeIcon } from '@/assets/icons/CafeIcon';
@@ -9,7 +10,8 @@ import { ParkIcon } from '@/assets/icons/ParkIcon';
 import { HeartICon } from '@/assets/icons/HeartIcon';
 import { UserIcon } from '@/assets/icons/UserIcon';
 import { FilterIcon } from '@/assets/icons/FilterIcon';
-import { HTMLAttributes } from 'react';
+import {clsx} from 'clsx';
+
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface IPopupInfo {
@@ -235,7 +237,8 @@ const MainMap: FC = () => {
           <input
             type='text'
             placeholder='Search for pet friendly places'
-            className='w-full rounded-full bg-brand border-brand-200 border-2 border-opacity-50 focus:outline-brand-200 focus:border-none py-2.5 ps-12'
+            className='accent-brand-200 w-full rounded-full bg-brand border-brand-200 border-2 border-opacity-30 
+              focus:shadow-2xl focus:ring-0 focus:border-brand-200 focus:border-opacity-70 py-2.5 ps-12 transition-all '
           />
           <button type='button' className='absolute inset-y-0 start-0 text-text w-12 place-content-center grid'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
@@ -244,14 +247,52 @@ const MainMap: FC = () => {
           </button>
         </div>
         
-        {showFilter &&
-          <div className='absolute right-8 bottom-24 flex flex-col gap-2'>
-            <CafeIcon onClick={handleCafeFilter}/>
-            <RestaurantIcon onClick={handleRestaurantFilter} />
-            <BarIcon onClick={handleBarFilter}/>
-            <ParkIcon onClick={handleParkFilter} />
-          </div>
-        }
+        <AnimatePresence>
+          {showFilter &&
+            <div className='absolute right-8 bottom-24 flex flex-col gap-2'>
+              <motion.div
+                initial={{scale:0}}
+                animate={{scale:1}}
+                exit={{scale:0}}
+              >
+                <CafeIcon 
+                  onClick={handleCafeFilter}
+                  className='active:scale-125 transition'
+                />
+              </motion.div>
+              <motion.div
+                initial={{scale:0}}
+                animate={{scale:1}}
+                exit={{scale:0}}
+              >
+                <RestaurantIcon 
+                  onClick={handleRestaurantFilter} 
+                  className='active:scale-125 transition'
+                />
+              </motion.div>
+              <motion.div
+                initial={{scale:0}}
+                animate={{scale:1}}
+                exit={{scale:0}}
+              >
+                <BarIcon 
+                  onClick={handleBarFilter}
+                  className='active:scale-125 transition'
+                />
+              </motion.div>
+              <motion.div
+                initial={{scale:0}}
+                animate={{scale:1}}
+                exit={{scale:0}}
+              >
+                <ParkIcon 
+                  onClick={handleParkFilter} 
+                  className='active:scale-125 transition'
+                />
+              </motion.div>
+            </div>
+          }
+        </AnimatePresence>
 
         {
           isBarsLoading && isCafesLoading && isRestaurantsLoading && isParksLoading && 
@@ -299,46 +340,64 @@ const MainMap: FC = () => {
             <Layer {...parkLayer} />
           </Source>
         }
-        {
-          popupInfo?.name && 
-            <Popup 
-              longitude={popupInfo.longitude} 
-              latitude={popupInfo.latitude}
-              anchor='bottom'
-              onClose={()=>setPopupInfo(null)}
-              closeOnClick={false}
-              closeButton={false}
+        <AnimatePresence>
+          {
+            popupInfo?.name &&
+              <Popup 
+                longitude={popupInfo.longitude} 
+                latitude={popupInfo.latitude}
+                anchor='bottom'
+                onClose={()=>setPopupInfo(null)}
+                closeOnClick={false}
+                closeButton={false}
               >
-              <div className='text-brand2-200 text-center'>
-                <p className='mb-2 font-bold text-base'>
-                  {popupInfo.name}
-                </p>
-                <div className='mb-3 text-sm flex gap-2 justify-center'>
-                  <p>
-                    {popupInfo.type}
+                <motion.div 
+                  initial={{opacity:0, y:8}}
+                  animate={{opacity:1, y:0}}
+                  exit={{opacity:0, y:8}}
+                  className='text-brand2-200 text-center'>
+                  <p className='mb-2 font-bold text-base'>
+                    {popupInfo.name}
                   </p>
-                  <p>
-                    4.7/5.0
-                  </p>
-                </div>
-                <button className='btn-sm rounded-lg bg-brand2 text-text-100'>
-                  OPEN
-                </button>
-              </div>
-            </Popup>
-        }
-        <ul className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
-          h-16 rounded-full text-3xl text-text shadow-2xl'>
-          <li>
-            <HeartICon />
-          </li>
-          <li>
-            <UserIcon />
-          </li>
-          <li>
-            <FilterIcon onClick={toggleShowFilter}/>
-          </li>
-        </ul>
+                  <div className='mb-3 text-sm flex gap-2 justify-center'>
+                    <p>
+                      {popupInfo.type}
+                    </p>
+                    <p>
+                      4.7/5.0
+                    </p>
+                  </div>
+                  <button className='btn-sm rounded-lg bg-brand2 text-text-100'>
+                    OPEN
+                  </button>
+                </motion.div>
+              </Popup>
+          }
+        </AnimatePresence>
+        <div className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
+          h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
+          <button
+            className='grid place-items-center
+            active:scale-125 transition ease-in-out duration-200'
+          >
+            <HeartICon strokeWidth='1.8'/>
+          </button>
+          <button
+            className='grid place-items-center
+            active:scale-125 transition ease-in-out duration-200'
+          >
+            <UserIcon strokeWidth='1.8'/>
+          </button>
+          <button
+            onClick={toggleShowFilter}
+            className={clsx(
+              'grid place-items-center active:scale-125 transition ease-in-out duration-200',
+              showFilter && 'rotate-90'
+            )}
+          >
+            <FilterIcon strokeWidth='1.8'/>
+          </button>
+        </div>
         <GeolocateControl  position='bottom-left'/>
       </Map>
     </>

@@ -35,7 +35,12 @@ export default {
         error: {
           100: '#fb4b88',
           200: '#ff264e'
-        }
+        },
+      },
+      boxShadow: {
+        100: '0px 8px 40px 0px rgba(0, 0, 61, 0.05), 0px 12px 32px -16px rgba(0, 0, 0, 0.05)',
+        200: '0px 12px 60px 0px rgba(1, 1, 45, 0.05), 0px 12px 32px -16px rgba(0, 0, 0, 0.13)',
+        300: '0px 16px 64px 0px rgba(1, 6, 45, 0.17), 0px 16px 36px -20px rgba(1, 6, 45, 0.17)'
       }
     },
   },
