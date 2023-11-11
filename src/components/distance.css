@@ -1,0 +1,44 @@
+.filter1{
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    left: 32px;
+    top: 70px;
+color: red;
+
+}
+.filter2{
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    left: 150px;
+    top: 60px;
+    color: red;
+    
+}
+
+.filter3{
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    left: 240px;
+    top: 70px;
+    color: red;
+        
+        }
+.filter4{
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    left: 310px;
+    top: 69px;
+    color: red;
+            
+}
+.shops{
+    position: absolute;
+    width: 340px;
+    height: 1000px;
+    left: 5px;
+    top: 170px;
+}  

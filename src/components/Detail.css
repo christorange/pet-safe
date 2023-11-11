@@ -1,0 +1,355 @@
+/* Cafe Landwer */
+
+
+.title {
+    position: absolute;
+    width: 225px;
+    height: 61px;
+    left: calc(50% - 350px/2 - 0.5px);
+    top: 55px;
+    /* Title */
+    font-family: 'Baloo Da',Tahoma;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 61px;
+    /* identical to box height */
+    text-align: center;
+
+    color: #835DD3;
+}
+
+.save{
+    position: absolute;
+    width: 32.46px;
+    height: 32.46px;
+    left: 326px;
+    top: 69px;
+    /* Ellipse 9 */
+    box-sizing: border-box;
+    background: url(save.png);
+}
+.saved{
+    position: absolute;
+    width: 32.46px;
+    height: 32.46px;
+    left: 326px;
+    top: 69px;
+    /* Ellipse 9 */
+    box-sizing: border-box;
+    background: url(saved.png);
+}
+.placepic{
+    /* Rectangle 1 */
+    position: absolute;
+    width: 365px;
+    height: 267px;
+    left: 12px;
+    top: 124px;
+    background: url(placepic.png);
+    border-radius: 45px;
+}
+.scrolling-wrapper {
+    position: absolute;
+    width: 401px;
+    height: 31px;
+    left: 17px;
+    top: 415px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+}
+
+.scrolling-wrapper .catordog{
+    position: absolute;
+    width: 93px;
+    height: 31px;
+    left: 18px;
+    top: 415px;
+    background: #E6E7E8;
+    border-radius: 45px 45px 45px 4px;
+    /* Rectangle 7 */
+    position: absolute;
+    left: 7.71%;
+    right: 2.86%;
+    top: 12.9%;
+    bottom: 45.16%;
+    background: #58595B;
+    border-radius: 45px 45px 45px 4px;
+    /* Rectangle 6 */
+    position: absolute;
+    left: 2.71%;
+    right: 2.86%;
+    top: 12.9%;
+    bottom: 45.16%;
+    background: #E6E7E8;
+    border-radius: 45px 45px 45px 4px;
+    flex: 0 0 auto;
+    display: inline-block;
+
+
+}
+.scrolling-wrapper .medit{
+    /* detail page tag */
+    position: absolute;
+    width: 140px;
+    height: 31px;
+    left: 124px;
+    top: 415px;
+    /* Rectangle 3 */
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    background: #E6E7E8;
+    border-radius: 45px;
+    /* mediterranean */
+    position: absolute;
+    left: 30.71%;
+    right: 2.86%;
+    top: 12.9%;
+    bottom: 45.16%;
+    /* Body text */
+    font-family:  'Quicksand' sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    color: #414042;
+    flex: 0 0 auto;
+    display: inline-block;
+    
+    
+}
+.scrolling-wrapper .vegan{
+        /* Rectangle 8 */
+        position: absolute;
+        width: 140px;
+        height: 31px;
+        left: 278px;
+        top: 415px;
+
+        position: absolute;
+        left: 0%;
+        right: 0%;
+        top: 0%;
+        bottom: 0%;
+        background: #E6E7E8;
+        border-radius: 45px;
+        /* Vegan Option */
+        position: absolute;
+        left: 70.71%;
+        right: 2.86%;
+        top: 12.9%;
+        bottom: 45.16%;
+    
+        /* Body text */
+        font-family: 'Quicksand' sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+    
+        color: #414042;
+        flex: 0 0 auto;
+        display: inline-block;
+    
+}
+.scrolling-wrapper-flexbox {
+    position: absolute;
+    width: 389px;
+    height: 109px;
+    left: 12px;
+    top: 501px;
+    background: #E3F8D3;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+ 
+.scrolling-wrapper-flexbox .treat{
+    /* Group 61 */
+    position: absolute;
+    width: 40px;
+    height: 55px;
+    left: 40px;
+    top: 10px;
+    box-sizing: border-box;
+    background: url(treat.png);
+    
+    flex: 0 0 auto;
+
+}
+.scrolling-wrapper-flexbox .catfood{
+    /* Group 61 */
+    position: absolute;
+    width: 65px;
+    height: 55px;
+    left: 120px;
+    top: 10px;
+    box-sizing: border-box;
+    background: url(catfood.png);
+    flex: 0 0 auto;
+
+}
+.scrolling-wrapper-flexbox .leash{
+    /* Group 61 */
+    position: absolute;
+    width: 45px;
+    height: 55px;
+    left: 210px;
+    top: 12px;
+    box-sizing: border-box;
+    background: url(leash.png);
+    flex: 0 0 auto;
+
+}
+
+.scrolling-wrapper-flexbox .disability{
+    /* Group 61 */
+    position: absolute;
+    width: 67px;
+    height: 55px;
+    left: 270px;
+    top: 12px;
+    box-sizing: border-box;
+    background: url(Disability.png);
+    flex: 0 0 auto;
+
+}
+
+.scrolling-wrapper-flexbox .test{
+    /* Group 61 */
+    position: absolute;
+    width: 67px;
+    height: 55px;
+    left: 350px;
+    top: 12px;
+    box-sizing: border-box;
+    background: url(Disability.png);
+    flex: 0 0 auto;
+
+}
+.scrolling-wrapper,
+.scrolling-wrapper-flexbox {
+    height: 80px;
+    margin-bottom: 20px;
+    width: 100%;
+    -webkit-overflow-scrolling:touch;
+}
+.scrolling-wrapper::-webkit-scrollbar,
+.scrolling-wrapper-flexbox::-webkit-scrollbar {
+    display: none;
+}
+.menu{
+    /* Rectangle 43 */
+    position: absolute;
+    width: 171px;
+    height: 116px;
+    left: 18px;
+    top: 620px;
+    background: #E3F8D3;
+    border-radius: 20px;
+
+}
+.menufont{
+    /* Menu */
+    position: absolute;
+    width: 200px;
+    height: 49px;
+    left: -15px;
+    top: 30px;
+    /* Title */
+    font-family: 'Baloo Da', Verdana, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 35px;
+    line-height: 50px;
+    color: #5B4C99;
+}
+/* Rectangle 45 */
+.time{
+    /* Rectangle 43 */
+    position: absolute;
+    width: 171px;
+    height: 116px;
+    left: 204px;
+    top: 620px;
+    background: #E3F8D3;
+    border-radius: 20px;
+}
+.timefont{
+    /* Menu */
+    position: absolute;
+    width: 200px;
+    height: 49px;
+    left: -15px;
+    top: 30px;
+    /* Title */
+    font-family: 'Baloo Da', Verdana, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 35px;
+    line-height: 50px;
+    color: #5B4C99;
+}
+/* OPEN until 2:00 am */
+.opentime{
+    position: absolute;
+    left: 5.62%;
+    right: 54.87%;
+    top: 60.5%;
+    bottom: 43.96%;
+
+/* Body text */
+font-family: 'Quicksand', sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 20px;
+
+color: #65AC59;
+}
+
+.opentimerest{
+    position: absolute;
+    left: 17%;
+    right: 54.87%;
+    top: 60.5%;
+    bottom: 43.96%;
+    /* Body text */
+    font-family: 'Quicksand', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: black;
+}
+
+.comment{
+    position: absolute;
+    width: 1200px;
+    height: 70px;
+    left: 113px;
+    top: 801px;
+    /* Comment */
+    position: absolute;
+    width: 200px;
+    height: 49px;
+    left: 110px;
+    top: 800px;
+    /* Title */
+    font-family:  Verdana,'Baloo Da';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 60px;
+    color: #5B4C99;
+
+}
+

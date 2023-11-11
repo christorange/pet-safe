@@ -9,6 +9,7 @@ const MainMap: FC = () => {
 
   const {data: allPlacesData, isLoading} = trpc.places.allPlaces.useQuery()
   
+  
   const allPlacesLayer: CircleLayer = {
     id: 'allPlacesLayer',
     type: 'circle',
