@@ -60,40 +60,90 @@ specifiers:
   zod: ^3.22.4
 
 dependencies:
-  '@capacitor/android': 5.5.0_@capacitor+core@5.4.1
-  '@capacitor/app': 5.0.6_@capacitor+core@5.4.1
-  '@capacitor/core': 5.4.1
-  '@capacitor/geolocation': 5.0.6_@capacitor+core@5.4.1
-  '@capacitor/haptics': 5.0.6_@capacitor+core@5.4.1
-  '@capacitor/ios': 5.5.0_@capacitor+core@5.4.1
-  '@capacitor/keyboard': 5.0.6_@capacitor+core@5.4.1
-  '@capacitor/splash-screen': 5.0.6_@capacitor+core@5.4.1
-  '@capacitor/status-bar': 5.0.6_@capacitor+core@5.4.1
-  '@googlemaps/js-api-loader': 1.16.2
-  '@ionic-native/core': 5.36.0
-  '@ionic-native/geolocation': 5.36.0_@ionic-native+core@5.36.0
-  '@ionic/react': 7.5.0_react-dom@18.2.0+react@18.2.0
-  '@ionic/react-router': 7.5.0_5c58fdc9ca58488184935e5fd7f177b2
-  '@tanstack/react-query': 4.36.1_react-dom@18.2.0+react@18.2.0
-  '@trpc/client': 10.40.0_@trpc+server@10.40.0
-  '@trpc/react-query': 10.40.0_09f38b4d38df54098f1ba7eec15de832
-  '@trpc/server': 10.40.0
-  cordova-plugin-geolocation: 5.0.0
-  gsap: 3.12.2
-  ionicons: 7.2.1
-  mapbox-gl: 2.15.0
-  react: 18.2.0
-  react-dom: 18.2.0_react@18.2.0
-  react-horizontal-scrolling-menu: 4.1.1_react@18.2.0
-  react-map-gl: 7.1.6_687c77f19a5ee5b0c7ff1c9b9e31160e
-  react-router: 5.3.4_react@18.2.0
-  react-router-dom: 5.3.4_react@18.2.0
-  react-scroll-horizontal: 1.6.6_react-dom@18.2.0+react@18.2.0
-  react-tag-slider: 1.0.8
-  superjson: 1.13.3
-  terser: 5.22.0
-  vaul: 0.7.6_7a1f51c1ed5395f9ca3c50d11427730d
-  zod: 3.22.4
+  '@capacitor/android':
+    specifier: ^5.4.1
+    version: 5.4.1(@capacitor/core@5.4.1)
+  '@capacitor/app':
+    specifier: 5.0.6
+    version: 5.0.6(@capacitor/core@5.4.1)
+  '@capacitor/core':
+    specifier: 5.4.1
+    version: 5.4.1
+  '@capacitor/geolocation':
+    specifier: ^5.0.6
+    version: 5.0.6(@capacitor/core@5.4.1)
+  '@capacitor/haptics':
+    specifier: 5.0.6
+    version: 5.0.6(@capacitor/core@5.4.1)
+  '@capacitor/ios':
+    specifier: ^5.4.1
+    version: 5.4.1(@capacitor/core@5.4.1)
+  '@capacitor/keyboard':
+    specifier: 5.0.6
+    version: 5.0.6(@capacitor/core@5.4.1)
+  '@capacitor/splash-screen':
+    specifier: ^5.0.6
+    version: 5.0.6(@capacitor/core@5.4.1)
+  '@capacitor/status-bar':
+    specifier: 5.0.6
+    version: 5.0.6(@capacitor/core@5.4.1)
+  '@ionic-native/core':
+    specifier: ^5.36.0
+    version: 5.36.0(rxjs@6.6.7)
+  '@ionic-native/geolocation':
+    specifier: ^5.36.0
+    version: 5.36.0(@ionic-native/core@5.36.0)(rxjs@6.6.7)
+  '@ionic/react':
+    specifier: ^7.0.0
+    version: 7.4.1(react-dom@18.2.0)(react@18.2.0)
+  '@ionic/react-router':
+    specifier: ^7.0.0
+    version: 7.4.1(react-dom@18.2.0)(react-router-dom@5.3.4)(react-router@5.3.4)(react@18.2.0)
+  '@tanstack/react-query':
+    specifier: ^4.36.1
+    version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
+  '@trpc/client':
+    specifier: ^10.40.0
+    version: 10.40.0(@trpc/server@10.40.0)
+  '@trpc/react-query':
+    specifier: ^10.40.0
+    version: 10.40.0(@tanstack/react-query@4.36.1)(@trpc/client@10.40.0)(@trpc/server@10.40.0)(react-dom@18.2.0)(react@18.2.0)
+  '@trpc/server':
+    specifier: ^10.40.0
+    version: 10.40.0
+  cordova-plugin-geolocation:
+    specifier: ^5.0.0
+    version: 5.0.0
+  ionicons:
+    specifier: ^7.0.0
+    version: 7.1.2
+  mapbox-gl:
+    specifier: ^2.15.0
+    version: 2.15.0
+  react:
+    specifier: ^18.2.0
+    version: 18.2.0
+  react-dom:
+    specifier: ^18.2.0
+    version: 18.2.0(react@18.2.0)
+  react-map-gl:
+    specifier: ^7.1.6
+    version: 7.1.6(mapbox-gl@2.15.0)(react-dom@18.2.0)(react@18.2.0)
+  react-router:
+    specifier: ^5.3.4
+    version: 5.3.4(react@18.2.0)
+  react-router-dom:
+    specifier: ^5.3.4
+    version: 5.3.4(react@18.2.0)
+  superjson:
+    specifier: ^1.13.3
+    version: 1.13.3
+  vaul:
+    specifier: ^0.7.2
+    version: 0.7.2(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
+  zod:
+    specifier: ^3.22.4
+    version: 3.22.4
 
 devDependencies:
   '@capacitor/cli': 5.4.1
@@ -1407,8 +1457,8 @@ packages:
       '@capacitor/core': 5.4.1
     dev: false
 
-  /@esbuild/android-arm/0.18.20:
-    resolution: {integrity: sha512-fyi7TDI/ijKKNZTUJAQqiG5T7YjJXgnzkURqmGj13C6dCqckZBLdl4h7bkhHt/t0WP+zO9/zwroDvANaOqO5Sw==}
+  /@esbuild/android-arm64@0.18.20:
+    resolution: {integrity: sha512-Nz4rJcchGDtENV0eMKUNa6L12zz2zBDXuhj/Vjh18zGqB44Bi7MBMSXjgunJgjRhCmKOjnPuZp4Mb6OKqtMHLQ==}
     engines: {node: '>=12'}
     cpu: [arm]
     os: [android]
@@ -1651,7 +1701,8 @@ packages:
     peerDependencies:
       rxjs: ^5.5.0 || ^6.5.0
     dependencies:
-      '@types/cordova': 11.0.2
+      '@types/cordova': 11.0.1
+      rxjs: 6.6.7
     dev: false
 
   /@ionic-native/geolocation/5.36.0_@ionic-native+core@5.36.0:
@@ -1660,8 +1711,9 @@ packages:
       '@ionic-native/core': ^5.1.0
       rxjs: ^5.5.0 || ^6.5.0
     dependencies:
-      '@ionic-native/core': 5.36.0
-      '@types/cordova': 11.0.2
+      '@ionic-native/core': 5.36.0(rxjs@6.6.7)
+      '@types/cordova': 11.0.1
+      rxjs: 6.6.7
     dev: false
 
   /@ionic/cli-framework-output/2.2.6:
@@ -2564,8 +2616,8 @@ packages:
     resolution: {integrity: sha512-yW/qTM4mRBBcsA9Xw9FbcImYtFPY7sgr+G/O5RDYVmxiy9a+pE5FyoFUi8JYCZY5nicj8atrr1pcfPiYpeNGOA==}
     dev: true
 
-  /@types/cordova/11.0.2:
-    resolution: {integrity: sha512-swXLtFffXPQYz80eEX4URII7obHBZCS01JtI2Fh0Gt6dxgwoyDB7ZzfkRZgHHDxl1qRdMVRICMvfx2USIHPWCA==}
+  /@types/cordova@11.0.1:
+    resolution: {integrity: sha512-Zd6LAhYUAdn0mL0SbxHeF4fO/3uzkcW3fzE0ZIK1wDlTRCWlI4/0i+Phb+otP9ryziyeW2LKofRNSP5yil85hA==}
     dev: false
 
   /@types/fs-extra/8.1.3:
@@ -3148,7 +3200,7 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /color-convert/1.9.3:
+  /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
       color-name: 1.1.3
@@ -3262,7 +3314,7 @@ packages:
       rrweb-cssom: 0.6.0
     dev: true
 
-  /csstype/3.1.2:
+  /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
     dev: true
 
@@ -3777,7 +3829,7 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /fs-extra/9.1.0:
+  /fs-extra@9.1.0:
     resolution: {integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==}
     engines: {node: '>=10'}
     dependencies:
@@ -3892,7 +3944,7 @@ packages:
       is-glob: 4.0.3
     dev: true
 
-  /glob/7.1.6:
+  /glob@7.1.6:
     resolution: {integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==}
     dependencies:
       fs.realpath: 1.0.0
@@ -4367,7 +4419,7 @@ packages:
     hasBin: true
     dev: true
 
-  /js-tokens/4.0.0:
+  /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
   /js-yaml/4.1.0:
@@ -5855,7 +5907,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /symbol-tree/3.2.4:
+  /symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
     dev: true
 
@@ -6004,7 +6056,11 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /tslib/2.6.2:
+  /tslib@1.14.1:
+    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+    dev: false
+
+  /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
   /tsx/3.13.0:
