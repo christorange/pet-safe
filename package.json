@@ -23,6 +23,7 @@
     "@capacitor/keyboard": "5.0.6",
     "@capacitor/splash-screen": "^5.0.6",
     "@capacitor/status-bar": "5.0.6",
+    "@clerk/clerk-react": "^4.27.1",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/geolocation": "^5.36.0",
     "@ionic/react": "^7.0.0",
