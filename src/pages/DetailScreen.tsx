@@ -1,12 +1,8 @@
-
-
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import MainDrawer from '../components/Drawer';
 import '../components/Detail.css';
 
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import React ,{useState} from 'react';
-const Tab4: React.FC = () => {
+const DetailScreen: React.FC = () => {
   const handleClick = () => {
     // Define the action you want to perform when the button is clicked
     alert('Button clicked!');
@@ -75,6 +71,6 @@ const Tab4: React.FC = () => {
   );
 };
 
-export default Tab4;
+export default DetailScreen;
 
 

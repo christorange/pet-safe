@@ -8,7 +8,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
+import { ClerkProvider, SignedIn } from '@clerk/clerk-react';
 import MainScreen from './pages/MainScreen';
 import Tab2 from './pages/Tab2';
 import UserProfile from './pages/UserProfile';

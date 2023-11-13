@@ -1,5 +1,5 @@
 {
-  "name": "pet-safe",
+  "name": "petventure",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -23,6 +23,7 @@
     "@capacitor/keyboard": "5.0.6",
     "@capacitor/splash-screen": "^5.0.6",
     "@capacitor/status-bar": "5.0.6",
+    "@clerk/clerk-react": "^4.27.1",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/geolocation": "^5.36.0",
     "@ionic/react": "^7.0.0",
@@ -33,18 +34,15 @@
     "@trpc/server": "^10.40.0",
     "clsx": "^2.0.0",
     "cordova-plugin-geolocation": "^5.0.0",
+    "framer-motion": "^10.16.4",
     "ionicons": "^7.0.0",
     "mapbox-gl": "^2.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-horizontal-scrolling-menu": "^4.1.1",
     "react-map-gl": "^7.1.6",
     "react-router": "^5.3.4",
     "react-router-dom": "^5.3.4",
-    "react-scroll-horizontal": "^1.6.6",
-    "react-tag-slider": "^1.0.8",
     "superjson": "^1.13.3",
-    "terser": "^5.22.0",
     "vaul": "^0.7.6",
     "zod": "^3.22.4"
   },
@@ -73,5 +71,5 @@
     "vite": "^4.3.9",
     "vitest": "^0.32.2"
   },
-  "description": "An Ionic project"
+  "description": "Petventure frontend"
 }
