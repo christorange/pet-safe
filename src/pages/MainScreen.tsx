@@ -2,7 +2,7 @@ import { IonPage } from '@ionic/react';
 import MainMap from '../components/MainMap';
 import MainDrawer from '../components/Drawer';
 
-const Tab1: React.FC = () => {
+const MainScreen: React.FC = () => {
 
   return (
     <>
@@ -11,4 +11,4 @@ const Tab1: React.FC = () => {
   );
 };
 
-export default Tab1;
+export default MainScreen;

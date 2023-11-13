@@ -6,7 +6,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import MainDrawer from '../components/Drawer';
+import MainDrawer from './Drawer';
 import {
   ClerkProvider,
   SignedIn,

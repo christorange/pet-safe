@@ -16,11 +16,11 @@ import {
   RedirectToSignIn,
 } from "@clerk/clerk-react"; // Import ClerkProvider here
 
-import Dashboard from './Dashboard';
-import Tab1 from './Tab1';
+import Dashboard from '../components/Dashboard';
+import Tab1 from './MainScreen';
 
 
-const Tab3: React.FC = () => {
+const UserProfile: React.FC = () => {
   
 
   return (
@@ -44,4 +44,4 @@ const Tab3: React.FC = () => {
 };
 
 
-export default Tab3;
+export default UserProfile;
