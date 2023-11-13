@@ -12,7 +12,8 @@ import { ClerkProvider, SignedIn } from '@clerk/clerk-react';
 import MainScreen from './pages/MainScreen';
 import Tab2 from './pages/Tab2';
 import UserProfile from './pages/UserProfile';
-
+import DetailScreen from './pages/DetailScreen';
+import CardsScreen from './pages/CardsScreen';
 import './styles/global.css';
 
 /* Core CSS required for Ionic components to work properly */
@@ -56,6 +57,12 @@ const App: React.FC = () => (
                   <SignedIn>
                     <UserProfile />
                   </SignedIn>
+                </Route>
+                <Route path='/details'>
+                  <DetailScreen />
+                </Route>
+                <Route path='/browse'>
+                  <CardsScreen />
                 </Route>
               </IonRouterOutlet>
             </IonReactRouter>

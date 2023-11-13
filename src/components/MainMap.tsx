@@ -3,7 +3,6 @@ import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
 import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/clerk-react';
 
 import { BarIcon } from '@/assets/icons/BarIcon';
@@ -142,7 +141,6 @@ const MainMap: FC = () => {
       name: place?.properties?.name,
       type: place?.properties?.type
     })
-    console.log(popupInfo)
   },[popupInfo])
 
   // const allPlacesLayer: CircleLayer = {
