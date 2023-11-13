@@ -40,9 +40,15 @@ const UserProfile: React.FC = () => {
           <img className="profile-picture" src={userPic} alt="Profile Picture" />
           <div className="profile-description">Saved</div>
         </div>
-        <Link className='btn' to='/'>
-          Back to home
-        </Link>
+        <button 
+          className='btn mb-4'
+          onClick={() => {
+            history.push('/')
+            history.go(0)
+          }}
+        >
+          Back
+        </button>
         <button className='btn' onClick={
           ()=>signOut(() => history.push('/'))
         }>
