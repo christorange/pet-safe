@@ -1,14 +1,8 @@
 import React from 'react';
 import {
-  IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
 } from '@ionic/react';
 import {
-  SignOutButton,
-  SignedIn,
   useUser,
   useAuth,
   useClerk
@@ -40,9 +34,15 @@ const UserProfile: React.FC = () => {
           <img className="profile-picture" src={userPic} alt="Profile Picture" />
           <div className="profile-description">Saved</div>
         </div>
-        <Link className='btn' to='/'>
+        <button 
+          className='btn'
+          onClick={() => { 
+            history.push('/')
+            history.go(0)
+          }}
+        >
           Back to home
-        </Link>
+        </button>
         <button className='btn' onClick={
           ()=>signOut(() => history.push('/'))
         }>
