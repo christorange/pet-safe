@@ -6,40 +6,50 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import MainDrawer from '../components/Drawer';
 import {
-  ClerkProvider,
+  SignOutButton,
   SignedIn,
-  SignedOut,
-  UserButton,
   useUser,
-  RedirectToSignIn,
-} from "@clerk/clerk-react"; // Import ClerkProvider here
-
-import Dashboard from '../components/Dashboard';
-import Tab1 from './MainScreen';
-
+  useAuth,
+  useClerk
+} from "@clerk/clerk-react";
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+import '../styles/ppage.css';
 
 const UserProfile: React.FC = () => {
-  
+
+  const { isLoaded, isSignedIn, user } = useUser();
+  const { userId, sessionId, getToken } = useAuth();
+  const history = useHistory();
+  const { signOut } = useClerk();
+
+  if (!isLoaded || !userId || !user) {
+    return null;
+  }
+
+  const userPic = user.imageUrl;
 
   return (
-    <ClerkProvider publishableKey={import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY}>
-      <IonPage className=' bg-background'>
-        <IonHeader>
-          <IonToolbar>
-            <p className='text-center font-bold'>Tab3</p>
-          </IonToolbar>
-        </IonHeader>
-          <SignedIn>
-            <Dashboard />
-          </SignedIn>
-          <SignedOut>
-            <RedirectToSignIn />
-            <p className='text-center font-bold'>You are Signed Out</p>
-          </SignedOut>
-      </IonPage>
-    </ClerkProvider>
+    <IonPage className=' bg-background'>
+      <div className="profile-container">
+        <div className="user-header">
+          <div className="user-name">{user.firstName}</div>
+        </div>
+        <div className="user-info">
+          <img className="profile-picture" src={userPic} alt="Profile Picture" />
+          <div className="profile-description">Saved</div>
+        </div>
+        <Link className='btn' to='/'>
+          Back to home
+        </Link>
+        <button className='btn' onClick={
+          ()=>signOut(() => history.push('/'))
+        }>
+          Sign Out
+        </button>
+      </div>
+    </IonPage>
   );
 };
 
