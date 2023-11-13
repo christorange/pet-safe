@@ -6,17 +6,14 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import MainDrawer from '../components/Drawer';
+import MainDrawer from './Drawer';
 import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
   SignOutButton,
-  UserButton,
   useUser,
-  RedirectToSignIn,
-  useAuth
-} from "@clerk/clerk-react"; // Import ClerkProvider here
+  useAuth,
+  useClerk
+} from "@clerk/clerk-react";
+import { useHistory } from 'react-router';
 import '../styles/ppage.css';
 
 
@@ -31,7 +28,6 @@ const Dashboard: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <Welcome />
-        <SignOutButton />
         <MainDrawer />
       </IonPage>
   );
@@ -39,10 +35,11 @@ const Dashboard: React.FC = () => {
 
 function Welcome() {
   
-
   const { isLoaded, isSignedIn, user } = useUser();
   const { userId, sessionId, getToken } = useAuth();
-  
+  const history = useHistory();
+  const { signOut } = useClerk();
+
   if (!isLoaded || !userId || !user) {
     return null;
   }
@@ -58,6 +55,12 @@ function Welcome() {
         <img className="profile-picture" src={userPic} alt="Profile Picture" />
         <div className="profile-description">Saved</div>
       </div>
+      <button className='btn' onClick={
+        ()=>signOut(() => history.push('/'))
+      }>
+        Sign Out
+      </button>
+
     </div>
   );
 }

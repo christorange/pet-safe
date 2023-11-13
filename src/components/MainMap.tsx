@@ -3,6 +3,9 @@ import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
 import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/clerk-react';
+
 import { BarIcon } from '@/assets/icons/BarIcon';
 import { RestaurantIcon } from '@/assets/icons/RestaurantIcon';
 import { CafeIcon } from '@/assets/icons/CafeIcon';
@@ -374,6 +377,8 @@ const MainMap: FC = () => {
               </Popup>
           }
         </AnimatePresence>
+
+        {/* bottom bar */}
         <div className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
           h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
           <button
@@ -382,12 +387,25 @@ const MainMap: FC = () => {
           >
             <HeartICon strokeWidth='1.8'/>
           </button>
-          <button
-            className='grid place-items-center
-            active:scale-125 transition ease-in-out duration-200'
-          >
-            <UserIcon strokeWidth='1.8'/>
-          </button>
+          <SignedIn>
+            <UserButton 
+              afterSignOutUrl='/'
+              userProfileUrl='/userprofile'
+            />
+          </SignedIn>
+          <SignedOut>
+            <SignInButton
+              redirectUrl='/userprofile'
+              mode='modal'
+            >
+              <button
+                className='grid place-items-center
+                active:scale-125 transition ease-in-out duration-200'
+                >
+                <UserIcon strokeWidth='1.8'/>
+              </button>
+            </SignInButton>
+          </SignedOut>
           <button
             onClick={toggleShowFilter}
             className={clsx(
@@ -398,7 +416,7 @@ const MainMap: FC = () => {
             <FilterIcon strokeWidth='1.8'/>
           </button>
         </div>
-        <GeolocateControl  position='bottom-left'/>
+        <GeolocateControl position='bottom-left'/>
       </Map>
     </>
   )

@@ -15,3 +15,7 @@ body{
 .mapboxgl-popup-content{
   @apply bg-brand2-100 rounded-lg shadow-2xl;
 }
+
+.mapboxgl-popup-tip{
+  display: none;
+}
