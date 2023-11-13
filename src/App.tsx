@@ -36,6 +36,7 @@ import './styles/variables.css';
 
 setupIonicReact();
 
+
 const App: React.FC = () => (
   <>
     <trpc.Provider client={trpcClient} queryClient={reactQueryClient}>
