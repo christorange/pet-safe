@@ -3,6 +3,7 @@ import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
 import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { BarIcon } from '@/assets/icons/BarIcon';
 import { RestaurantIcon } from '@/assets/icons/RestaurantIcon';
 import { CafeIcon } from '@/assets/icons/CafeIcon';
@@ -226,7 +227,7 @@ const MainMap: FC = () => {
           width: '100vw',
           height: '100vh'
         }}
-        mapStyle="mapbox://styles/christorange/clnt6653300d601qj6z456rlx"
+        mapStyle="mapbox://styles/mapbox/light-v11"
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         ref={mapRef}
         onLoad={()=>mapOnLoad()}
@@ -374,6 +375,8 @@ const MainMap: FC = () => {
               </Popup>
           }
         </AnimatePresence>
+
+        {/* bottom bar */}
         <div className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
           h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
           <button
@@ -382,12 +385,14 @@ const MainMap: FC = () => {
           >
             <HeartICon strokeWidth='1.8'/>
           </button>
-          <button
-            className='grid place-items-center
-            active:scale-125 transition ease-in-out duration-200'
-          >
-            <UserIcon strokeWidth='1.8'/>
-          </button>
+          <Link className='!text-brand-200' to="/userprofile">
+            <button
+              className='grid place-items-center
+              active:scale-125 transition ease-in-out duration-200'
+              >
+              <UserIcon strokeWidth='1.8'/>
+            </button>
+          </Link>
           <button
             onClick={toggleShowFilter}
             className={clsx(

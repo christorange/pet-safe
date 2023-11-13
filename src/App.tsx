@@ -13,9 +13,9 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Tab1 from './pages/Tab1';
+import MainScreen from './pages/MainScreen';
 import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import UserProfile from './pages/UserProfile';
 
 import './styles/global.css';
 
@@ -48,17 +48,14 @@ const App: React.FC = () => (
           <IonReactRouter>
             {/* <IonTabs> */}
               <IonRouterOutlet>
-                <Route exact path="/tab1">
-                  <Tab1 />
+                <Route exact path="/">
+                  <MainScreen />
                 </Route>
                 <Route exact path="/tab2">
                   <Tab2 />
                 </Route>
-                <Route path="/tab3">
-                  <Tab3 />
-                </Route>
-                <Route exact path="/">
-                  <Redirect to="/tab1" />
+                <Route path="/userprofile">
+                  <UserProfile />
                 </Route>
               </IonRouterOutlet>
               {/* <IonTabBar slot="bottom">
