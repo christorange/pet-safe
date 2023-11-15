@@ -3,7 +3,6 @@ import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
 import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/clerk-react';
 
 import { BarIcon } from '@/assets/icons/BarIcon';
@@ -87,7 +86,6 @@ const MainMap: FC = () => {
     isLoading: isParksLoading
   } = trpc.places.parks.useQuery()
 
-
   const mapRef = useRef<MapRef | null>(null);
 
   const mapOnLoad = useCallback(()=>{
@@ -95,35 +93,28 @@ const MainMap: FC = () => {
       const map = mapRef.current.getMap();
       map.resize();
       if(!map.hasImage('barIcon')){
-        map.loadImage('src/assets/bar-icon.png', (error, image) => {
+        map.loadImage('https://christorange.github.io/pet-safe/src/assets/bar-icon.png', (error, image) => {
           if (error || !image) throw error;
           map.addImage('barIcon', image, {sdf: false});
         })
       }
 
       if (!map.hasImage('restaurantIcon')){
-        map.loadImage('src/assets/restaurant-icon.png', (error, image) => {
+        map.loadImage('https://christorange.github.io/pet-safe/src/assets/restaurant-icon.png', (error, image) => {
           if (error || !image) throw error;
           map.addImage('restaurantIcon', image, {sdf: false});
         })
-
-        // let img = new Image(20,20);
-        // img.crossOrigin = 'Anonymous';
-        // img.src = 'src/assets/restaurant-icon.png';
-        // img.onload = ()=> {
-        //   map.addImage('restaurantIcon', img);
-        // }
       }
 
       if (!map.hasImage('cafeIcon')){
-        map.loadImage('src/assets/cafe-icon.png', (error, image) => {
+        map.loadImage('https://christorange.github.io/pet-safe/src/assets/cafe-icon.png', (error, image) => {
           if (error || !image) throw error;
           map.addImage('cafeIcon', image, {sdf: false});
         })
       }
 
       if (!map.hasImage('parkIcon')){
-        map.loadImage('src/assets/park-icon.png', (error, image) => {
+        map.loadImage('https://christorange.github.io/pet-safe/src/assets/park-icon.png', (error, image) => {
           if (error || !image) throw error;
           map.addImage('parkIcon', image, {sdf: false});
         })
@@ -176,7 +167,7 @@ const MainMap: FC = () => {
     layout: {
       'icon-image': 'restaurantIcon',
       'icon-size': 0.7,
-      'icon-allow-overlap': true,      
+      'icon-allow-overlap': true,
       'text-field': '{name}',
       'text-size': 11,
       'text-offset': [0, 2.5],
