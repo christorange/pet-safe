@@ -10,6 +10,8 @@ import {
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import '../styles/ppage.css';
+import { trpc } from '../api';
+import { useEffect } from 'react';
 
 const UserProfile: React.FC = () => {
 
@@ -17,13 +19,51 @@ const UserProfile: React.FC = () => {
   const { userId, sessionId, getToken } = useAuth();
   const history = useHistory();
   const { signOut } = useClerk();
+  
 
   if (!isLoaded || !userId || !user) {
     return null;
   }
+  
+  
+  const createUserMutation = trpc.user.createUser.useMutation();
+
+  const handleCreateUser = async () => {
+    try {
+      const username = user.firstName;
+      const email = user.emailAddresses;
+
+      await createUserMutation.mutateAsync({
+        id: userId,
+        name: username || '{}',
+        email: email.toString() || '{}',
+      });
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchOneUser = trpc.user.getOne.useQuery({ id: userId }).data;
+
+  // const conditionalCreate = async () => {
+  //   try {
+  //      const res = fetchOneUser;
+  //      if (res == null || res == undefined) {
+  //       handleCreateUser();
+  //      }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  useEffect(() => {
+    handleCreateUser()
+  }, []);
+
 
   const userPic = user.imageUrl;
-
+ 
   return (
     <IonPage className=' bg-background'>
       <div className="profile-container">
