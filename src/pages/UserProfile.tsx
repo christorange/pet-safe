@@ -46,19 +46,19 @@ const UserProfile: React.FC = () => {
 
   const fetchOneUser = trpc.user.getOne.useQuery({ id: userId }).data;
 
-  const conditionalCreate = async () => {
-    try {
-       const res = fetchOneUser;
-       if (res == null || res == undefined) {
-        handleCreateUser();
-       }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const conditionalCreate = async () => {
+  //   try {
+  //      const res = fetchOneUser;
+  //      if (res == null || res == undefined) {
+  //       handleCreateUser();
+  //      }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   useEffect(() => {
-    conditionalCreate();
+    handleCreateUser()
   }, []);
 
 
