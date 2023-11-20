@@ -11,6 +11,7 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import '../styles/ppage.css';
 import { trpc } from '../api';
+import { useEffect } from 'react';
 
 const UserProfile: React.FC = () => {
 
@@ -19,31 +20,46 @@ const UserProfile: React.FC = () => {
   const history = useHistory();
   const { signOut } = useClerk();
   
+
   if (!isLoaded || !userId || !user) {
     return null;
   }
   
-  const getUserData = () => {
-    // Ensure user data is available before proceeding
-    if (!isLoaded || !userId || !user) {
-      return null;
+  
+  const createUserMutation = trpc.user.createUser.useMutation();
+
+  const handleCreateUser = async () => {
+    try {
+      const username = user.firstName;
+      const email = user.emailAddresses;
+
+      await createUserMutation.mutateAsync({
+        id: userId,
+        name: username || '{}',
+        email: email.toString() || '{}',
+      });
+      
+    } catch (error) {
+      console.log(error);
     }
-
-    const username = user.firstName;
-    const email = user.emailAddresses;
-
-    const res = trpc.user.getOne.useQuery({ id: userId }).data;
-
-    if (!res) {
-      console.log('User not in DB');
-      trpc.user.createUser.useMutation({ id: userId, 
-        email: email, 
-        name: username });
-    }
-
-    return user;
   };
 
+  const fetchOneUser = trpc.user.getOne.useQuery({ id: userId }).data;
+
+  const conditionalCreate = async () => {
+    try {
+       const res = fetchOneUser;
+       if (res == null || res == undefined) {
+        handleCreateUser();
+       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    conditionalCreate();
+  }, []);
 
 
   const userPic = user.imageUrl;
