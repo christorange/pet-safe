@@ -1,20 +1,22 @@
 import { IonPage } from '@ionic/react';
 import '../components/distance.css';
-import {Restaurant} from '../components/restaurant'; // Adjust the path to your component
+import {Restaurant} from '../assets/icons/restaurant'; // Adjust the path to your component
 import {Cafe} from '../assets/icons/cafe';
 import {Park} from '../assets/icons/park';
 import {Bar} from '../assets/icons/bar';
+
+import DivScroller from '../components/DivScroller'
 import  React, { FC, useState, useEffect } from 'react';
 import { trpc } from '../api';
 
+
 const CardsScreen: React.FC = () => {
   const {data: allPlacesData, isLoading} = trpc.places.allPlaces.useQuery()
-
   const restaurants = [
-    { id: 1, name: 'Restaurant A', cuisine: 'Italian' },
-    { id: 2, name: 'Restaurant B', cuisine: 'Mexican' },
-    { id: 3, name: 'Restaurant C', cuisine: 'Indian' },
-    { id: 4, name: 'Restaurant D', cuisine: 'Chinese' },
+    { id: 1, name: 'The Friendly Toast', cuisine: 'Restaurat' },
+    { id: 2, name: 'Restaurant B', cuisine: 'Cafe' },
+    { id: 3, name: 'Restaurant C', cuisine: 'Park' },
+    { id: 4, name: 'Park-9', cuisine: 'Bar' },
     // Add more restaurants
   ];
 
@@ -29,42 +31,38 @@ const CardsScreen: React.FC = () => {
   return (
     <IonPage>
      <div className = "filter1">
-      <button onClick={() => handleFilter('Italian')}><Restaurant /></button>
-
+     <button onClick={() => handleFilter('Restaurat')}><Restaurant /></button>
    </div>
     <div className = "filter2">
-    <button onClick={() => handleFilter('Mexican')}><Cafe/></button>
+    <button onClick={() => handleFilter('Cafe')}><Cafe/></button>
     </div>
     <div className = "filter3">
-    <button onClick={() => handleFilter('Indian')}><Bar/></button>
+    <button onClick={() => handleFilter('Park')}><Bar/></button>
     </div>
     <div className = "filter4">
-    <button onClick={() => handleFilter('Chinese')}><Park/></button>
+    <button onClick={() => handleFilter('Bar')}><Park/></button>
     </div>
     <div className = "shops">
-    <div className="card w-96 bg-base-100 shadow-xl">
-  <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-  <div className="card-body">
-    <h2 className="card-title">Shoes!</h2>
-    <p>If a dog chews shoes whose shoes does he choose?</p>
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
-    </div>
-  </div>
-</div>
+      <DivScroller/>
+<ul>
+  {filteredRestaurants.map(restaurant => (
+    <li key={restaurant.id}>
+      {restaurant.name} - {restaurant.cuisine}
+    </li>
+  ))}
 
-      <ul>
-        {filteredRestaurants.map(restaurant => (
-          <li key={restaurant.id}>
-            {restaurant.name} - {restaurant.cuisine}
-          </li>
-        ))}
+</ul>
 
-      </ul>
     </div>
      
     </IonPage>
   );
 };
-
+// {pane === '1' && <DivScroller/>}
 export default CardsScreen;
+
+
+
+
+
+

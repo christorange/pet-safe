@@ -12,8 +12,9 @@ import { ClerkProvider, SignedIn } from '@clerk/clerk-react';
 import MainScreen from './pages/MainScreen';
 import Tab2 from './pages/Tab2';
 import UserProfile from './pages/UserProfile';
-import DetailScreen from './pages/DetailScreen';
+import Profilescreen from './pages/Profilescreen';
 import CardsScreen from './pages/CardsScreen';
+
 import './styles/global.css';
 
 /* Core CSS required for Ionic components to work properly */
@@ -34,6 +35,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './styles/variables.css';
+import ProfileScreen from './pages/Profilescreen';
 
 setupIonicReact();
 
@@ -58,8 +60,8 @@ const App: React.FC = () => (
                     <UserProfile />
                   </SignedIn>
                 </Route>
-                <Route path='/details'>
-                  <DetailScreen />
+                <Route path='/profile'>
+                  <Profilescreen />
                 </Route>
                 <Route path='/browse'>
                   <CardsScreen />
@@ -71,6 +73,11 @@ const App: React.FC = () => (
       </QueryClientProvider>
     </trpc.Provider>
   </>
+
+
+
+
+
 );
 
 export default App;

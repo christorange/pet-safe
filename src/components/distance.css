@@ -42,3 +42,40 @@ color: red;
     left: 5px;
     top: 170px;
 }  
+.names{
+
+
+/* Full name */
+width: 400px;
+height: 150px;
+left: 100px;
+top: 70px;
+
+
+/* Map points */
+color: #665192;
+
+
+
+
+}
+.icon{
+    /* Avatar */
+    position: absolute;
+    width: 208px;
+    height: 168px;
+    left: 100px;
+    top: 150px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+
+}
+.savedshops{
+    position: absolute;
+    width: 340px;
+    height: 1000px;
+    left: 5px;
+    top: 370px;
+} 
