@@ -19,23 +19,30 @@ const UserProfile: React.FC = () => {
   const history = useHistory();
   const { signOut } = useClerk();
   
-
   if (!isLoaded || !userId || !user) {
     return null;
   }
-  const username = user.firstName;
-  const email = user.emailAddresses;
+  
+  const getUserData = () => {
+    // Ensure user data is available before proceeding
+    if (!isLoaded || !userId || !user) {
+      return null;
+    }
 
-  // if res is null - not in db - create a new user 
-  const res = trpc.user.getOne.useQuery({ id: userId }).data
-  console.log(res)
-  if (!res){
-    console.log('User not in DB');
-    trpc.user.createUser.useMutation({ 
-      id: userId,
-      email: email,
-      name: username });
-  }
+    const username = user.firstName;
+    const email = user.emailAddresses;
+
+    const res = trpc.user.getOne.useQuery({ id: userId }).data;
+
+    if (!res) {
+      console.log('User not in DB');
+      trpc.user.createUser.useMutation({ id: userId, 
+        email: email, 
+        name: username });
+    }
+
+    return user;
+  };
 
 
 
