@@ -10,6 +10,7 @@ import {
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import '../styles/ppage.css';
+import { trpc } from '../api';
 
 const UserProfile: React.FC = () => {
 
@@ -17,13 +18,29 @@ const UserProfile: React.FC = () => {
   const { userId, sessionId, getToken } = useAuth();
   const history = useHistory();
   const { signOut } = useClerk();
+  
 
   if (!isLoaded || !userId || !user) {
     return null;
   }
+  const username = user.firstName;
+  const email = user.emailAddresses;
+
+  // if res is null - not in db - create a new user 
+  const res = trpc.user.getOne.useQuery({ id: userId }).data
+  console.log(res)
+  if (!res){
+    console.log('User not in DB');
+    trpc.user.createUser.useMutation({ 
+      id: userId,
+      email: email,
+      name: username });
+  }
+
+
 
   const userPic = user.imageUrl;
-
+ 
   return (
     <IonPage className=' bg-background'>
       <div className="profile-container">
