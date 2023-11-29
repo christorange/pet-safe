@@ -3,7 +3,7 @@ import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
 import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/clerk-react';
 
 import { BarIcon } from '@/assets/icons/BarIcon';
@@ -26,6 +26,12 @@ interface IPopupInfo {
 
 const MainMap: FC = () => {
   
+  const history = useHistory();
+
+  const redirectToDistance = () => {
+    history.push('/distance');
+  };
+
   const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all')
   const [popupInfo, setPopupInfo] = useState<IPopupInfo | null>(null)
   const [showFilter, setShowFilter] = useState<boolean>(false)
@@ -384,6 +390,7 @@ const MainMap: FC = () => {
           <button
             className='grid place-items-center
             active:scale-125 transition ease-in-out duration-200'
+            onClick={redirectToDistance}
           >
             <HeartICon strokeWidth='1.8'/>
           </button>

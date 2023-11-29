@@ -12,6 +12,7 @@ import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/cle
 import MainScreen from './pages/MainScreen';
 import Tab2 from './pages/Tab2';
 import UserProfile from './pages/UserProfile';
+import DivScroller from './pages/DivScroller'
 
 import './styles/global.css';
 
@@ -56,6 +57,9 @@ const App: React.FC = () => (
                   <SignedIn>
                     <UserProfile />
                   </SignedIn>
+                </Route>
+                <Route exact path="/distance">
+                  <DivScroller />
                 </Route>
               </IonRouterOutlet>
             </IonReactRouter>
