@@ -1,17 +1,7 @@
-.user-header {
-    position: fixed;
-    top: 5vh;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    color: black;
-    padding: 10px;
-    text-align: center;
-    z-index: 1;
-  }
+
   
   .profile-container {
-    margin-top: 20vh; /* Adjust the margin-top to create space below the fixed header */
+    margin-top: 5vh; /* Adjust the margin-top to create space below the fixed header */
     display: flex;
     flex-direction: column;
     align-items: center;

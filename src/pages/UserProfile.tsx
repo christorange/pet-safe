@@ -9,9 +9,9 @@ import {
 } from "@clerk/clerk-react";
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import '../styles/ppage.css';
 import { trpc } from '../api';
 import { useEffect } from 'react';
+import '../styles/ppage.css'
 
 const UserProfile: React.FC = () => {
 
@@ -67,11 +67,11 @@ const UserProfile: React.FC = () => {
   return (
     <IonPage className=' bg-background'>
       <div className="profile-container">
-        <div className="user-header">
-          <div className="user-name">{user.firstName}</div>
+        <div className="hero hero-content text-center">
+          <div className="user-name text-5xl font-bold" >{user.firstName}</div>
         </div>
         <div className="user-info">
-          <img className="profile-picture" src={userPic} alt="Profile Picture" />
+          <img className="profile-picture rounded-full shadow-xl border-8 border-indigo-500" src={userPic} alt="Profile Picture" />
           <div className="profile-description">Saved</div>
         </div>
         <button 

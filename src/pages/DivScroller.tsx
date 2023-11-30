@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 import InfiniteScroll from '../components/InfiniteScroll'
 import { IonPage } from '@ionic/react';
 import '../styles/distance.css';
@@ -12,6 +12,7 @@ import {Star} from '../assets/icons/Star';
 import logo from "../assets/park9.png";
 import { trpc } from '../api'; // fetching places
 import { HalfStar } from '@/assets/icons/halfStar';
+import { motion, AnimatePresence } from 'framer-motion';
 
 let counter = 0
 
@@ -45,7 +46,7 @@ const DivScroller = () => {
   
   // Use the appropriate data based on placeType
   let placeData = allPlacesData;
-
+  
   // Use the appropriate data based on placeType
   if (placeType === 'bars') {
     placeData = barsData;
@@ -56,6 +57,54 @@ const DivScroller = () => {
   } else if (placeType === 'parks') {
     placeData = parksData;
   }
+  
+  const clearItems = () => {
+    setItems([]); // Clears the 'items' array
+  };
+
+  const handleCafeFilter = useCallback(() => {
+    if (placeType === 'cafes'){
+      setPlaceType('all')
+      console.log('set to all places')
+    }else {
+      setPlaceType('cafes')
+      clearItems();
+      placeData = cafesData;
+    }
+  }, [placeType])
+
+  const handleRestaurantFilter = useCallback(() => {
+    if (placeType === 'restaurants'){
+      setPlaceType('all')
+      console.log('set to all places')
+    }else {
+      setPlaceType('restaurants');
+      clearItems();
+      placeData = restaurantsData;
+    }
+  }, [placeType])
+
+  const handleBarFilter = useCallback(() => {
+    if (placeType === 'bars'){
+      setPlaceType('all')
+      console.log('set to all places')
+    }else {
+      setPlaceType('bars')
+      clearItems();
+      placeData = barsData;
+    }
+  }, [placeType])
+
+  const handleParkFilter = useCallback(() => {
+    if (placeType === 'parks'){
+      setPlaceType('all')
+      console.log('set to all places')
+    }else {
+      setPlaceType('parks')
+      clearItems();
+      placeData = parksData;
+    }
+  }, [placeType])
   
 
   const renderRatingStars = (rating: number) => {
@@ -69,24 +118,20 @@ const DivScroller = () => {
     }
   
     // Add a half star if applicable
-    // if (hasHalfStar) {
-    //   starIcons.push(<HalfStar key="half_star" />);
-    // }
+    if (hasHalfStar) {
+      starIcons.push(<HalfStar key="half_star" />);
+    }
   
     // Return the generated star icons
     return starIcons;
   };
   
-  // Inside your JSX where you render the rating:
-  <h2 className="card-title">
-    {renderRatingStars(4.4)}
-  </h2>
+  
 
   const fetchMore = async () => {
     await delay(async () => {
       const newItems = [];
       const totalFeatures = placeData?.features?.length || 0;
-      console.log(totalFeatures);
         for (let i = counter; i < counter + 10 && i < totalFeatures; i++) {
           console.log(placeData)
           const placeName = (placeData?.features[i].properties?.name || 'Unknown Name');
@@ -108,34 +153,43 @@ const DivScroller = () => {
         </div> )
         
       }
-      setItems([...items, ...newItems])
+      setItems(prevItems => [...prevItems, ...newItems]);
 
       counter += 10
     })
   }
 
+
+  
   useEffect(() => {
-    fetchMore().then()
-  }, [])
+    fetchMore().then(res => {
+      console.log(res);
+    }).catch(e => {
+      console.log(e);
+      return
+    })
+  }, [placeType])
+  
+  
 
   return (
     <IonPage>
-      <div className = "filter1">
-      <button><Restaurant /></button>
-
-   </div>
-    <div className = "filter2">
-    <button><Cafe/></button>
-    
+      <div className="filter1 active:scale-125 transition">
+      <button onClick={handleRestaurantFilter}><Restaurant /></button>
     </div>
-    <div className = "filter3">
-    <button ><Bar/></button>
+      <div className="filter2 active:scale-125 transition">
+      <button onClick={handleCafeFilter}><Cafe/></button>
+      
+      </div>
+      <div className="filter3 active:scale-125 transition">
+      <button onClick={handleBarFilter} ><Bar/></button>
+      
+      </div>
+      <div className="filter4 active:scale-125 transition">
+      <button onClick={handleParkFilter}><Park/></button>
+      
+      </div>
     
-    </div>
-    <div className = "filter4">
-    <button><Park/></button>
-    
-    </div>
     <div className = "shops">
     <div className="card w-96 bg-base-100 shadow-xl">
   
@@ -143,9 +197,9 @@ const DivScroller = () => {
     <div style={{right: 0,height: 802, width: 393,overflow: 'auto'}}>
       <InfiniteScroll
         useWindow={false}
-        threshold={2000}
-        
-        loader={<div className="loader" key={0}>...</div>}
+        threshold={100}
+        loadMore={fetchMore}
+        loader={<span className="loading loading-bars loading-lg items-center"></span>}
       >
         {items.map(item => <div key={item}>{item}</div>)}
       </InfiniteScroll>

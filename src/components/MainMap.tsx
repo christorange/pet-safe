@@ -28,9 +28,6 @@ const MainMap: FC = () => {
   
   const history = useHistory();
 
-  const redirectToDistance = () => {
-    history.push('/distance');
-  };
 
   const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all')
   const [popupInfo, setPopupInfo] = useState<IPopupInfo | null>(null)
@@ -390,7 +387,10 @@ const MainMap: FC = () => {
           <button
             className='grid place-items-center
             active:scale-125 transition ease-in-out duration-200'
-            onClick={redirectToDistance}
+            onClick={() => {
+              history.push('/distance');
+              history.go(0);
+            }}
           >
             <HeartICon strokeWidth='1.8'/>
           </button>
