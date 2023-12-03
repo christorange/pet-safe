@@ -14,6 +14,8 @@ import { trpc } from '../api'; // fetching places
 import { HalfStar } from '@/assets/icons/halfStar';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+
 let counter = 0
 
 
@@ -22,6 +24,19 @@ const DivScroller = () => {
   const [items, setItems] = useState<string[]>([]);
   const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all');
   const { data: allPlacesData, isLoading, isFetched } = trpc.places.allPlaces.useQuery();
+  // Getting User's location
+  const [position, setPosition] = useState<Geoposition | null>(null);
+
+  const getLocation = async () => {
+    try{   
+      const position = await Geolocation.getCurrentPosition();
+      setPosition(position);
+      console.log(position);
+    }catch (e) {
+      console.log(e);
+    }
+  };
+  
   
   // Separate state for different place types 
   const {
@@ -126,6 +141,26 @@ const DivScroller = () => {
     return starIcons;
   };
   
+  const distance = (
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+  ): number => {
+    const r = 6371; // km
+    const p = Math.PI / 180;
+  
+    const a =
+      0.5 -
+      Math.cos((lat2 - lat1) * p) / 2 +
+      Math.cos(lat1 * p) *
+        Math.cos(lat2 * p) *
+        (1 - Math.cos((lon2 - lon1) * p)) / 2;
+  
+    return 2 * r * Math.asin(Math.sqrt(a));
+  };
+  
+  
   
 
   const fetchMore = async () => {
@@ -138,6 +173,12 @@ const DivScroller = () => {
           const placeType = (placeData?.features[i].properties?.type || 'Unknown Type');
           const placeImage = (placeData?.features[i].properties?.photo || 'Unknown Type');
           const placeRate = (placeData?.features[i].properties?.rating || 'Unknown Type');
+
+          const latitude = (placeData?.features[i].properties?.latitude || 'Unknown Type');
+          const longitude = (placeData?.features[i].properties?.longitude || 'Unknown Type');
+
+          const dist = distance(position?.coords.latitude, position?.coords.longitude, latitude, longitude);
+
           placeData && newItems.push(
           <div className="card w-96 card-compact  --ion-color-success shadow-xl border-8 border-white">
           <figure><img src={placeImage} alt="Can't load" /></figure>
@@ -146,6 +187,7 @@ const DivScroller = () => {
             <p>{placeType}</p>
             <h2 className="card-title">{renderRatingStars(placeRate)}</h2>
             <div className="card-actions justify-end">
+              <h2>{dist}</h2>
               <button><Arrow/></button>
   
             </div>
@@ -162,6 +204,7 @@ const DivScroller = () => {
 
   
   useEffect(() => {
+    getLocation();
     fetchMore().then(res => {
       console.log(res);
     }).catch(e => {
