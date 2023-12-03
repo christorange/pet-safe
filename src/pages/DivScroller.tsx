@@ -31,7 +31,7 @@ const DivScroller = () => {
     try{   
       const position = await Geolocation.getCurrentPosition();
       setPosition(position);
-      console.log(position);
+      // console.log(position);
     }catch (e) {
       console.log(e);
     }
@@ -147,17 +147,19 @@ const DivScroller = () => {
     lat2: number,
     lon2: number
   ): number => {
-    const r = 6371; // km
-    const p = Math.PI / 180;
-  
+    const R = 6371; // Radius of the earth in km
+    const dLat = deg2rad(lat2 - lat1); // deg2rad below
+    const dLon = deg2rad(lon2 - lon1);
     const a =
-      0.5 -
-      Math.cos((lat2 - lat1) * p) / 2 +
-      Math.cos(lat1 * p) *
-        Math.cos(lat2 * p) *
-        (1 - Math.cos((lon2 - lon1) * p)) / 2;
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c; // Distance in km
+    return d;
+  };
   
-    return 2 * r * Math.asin(Math.sqrt(a));
+  const deg2rad = (deg: number): number => {
+    return deg * (Math.PI / 180);
   };
   
   
@@ -167,6 +169,9 @@ const DivScroller = () => {
     await delay(async () => {
       const newItems = [];
       const totalFeatures = placeData?.features?.length || 0;
+      while (position?.coords.latitude === undefined || position?.coords.longitude === undefined){
+        await getLocation();
+      }
         for (let i = counter; i < counter + 10 && i < totalFeatures; i++) {
           console.log(placeData)
           const placeName = (placeData?.features[i].properties?.name || 'Unknown Name');
@@ -174,9 +179,9 @@ const DivScroller = () => {
           const placeImage = (placeData?.features[i].properties?.photo || 'Unknown Type');
           const placeRate = (placeData?.features[i].properties?.rating || 'Unknown Type');
 
-          const latitude = (placeData?.features[i].properties?.latitude || 'Unknown Type');
-          const longitude = (placeData?.features[i].properties?.longitude || 'Unknown Type');
-
+          const latitude = (placeData?.features[i].geometry?.coordinates[1] || 'Unknown Type');
+          const longitude = (placeData?.features[i].geometry?.coordinates[0] || 'Unknown Type');
+          
           const dist = distance(position?.coords.latitude, position?.coords.longitude, latitude, longitude);
 
           placeData && newItems.push(
@@ -187,7 +192,7 @@ const DivScroller = () => {
             <p>{placeType}</p>
             <h2 className="card-title">{renderRatingStars(placeRate)}</h2>
             <div className="card-actions justify-end">
-              <h2>{dist}</h2>
+              <h2>{dist.toPrecision(2)}km</h2>
               <button><Arrow/></button>
   
             </div>
@@ -204,13 +209,21 @@ const DivScroller = () => {
 
   
   useEffect(() => {
-    getLocation();
-    fetchMore().then(res => {
-      console.log(res);
-    }).catch(e => {
-      console.log(e);
-      return
-    })
+    const fetchData = async () => {
+      try {
+          await fetchMore().then(res => {
+            console.log(res);
+          }).catch(e => {
+            console.log(e);
+            return
+          })   
+        
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    
+    fetchData();
   }, [placeType])
   
   
