@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from 'react'
+import React, {useEffect, useState, useCallback, ReactElement} from 'react'
 import InfiniteScroll from '../components/InfiniteScroll'
 import { IonPage } from '@ionic/react';
 import '../styles/distance.css';
@@ -15,6 +15,7 @@ import { HalfStar } from '@/assets/icons/halfStar';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import Fragment from 'react';
 
 let counter = 0
 
@@ -167,7 +168,7 @@ const DivScroller = () => {
 
   const fetchMore = async () => {
     await delay(async () => {
-      const newItems = [];
+      const newItems: ReactElement[]  = [];
       const totalFeatures = placeData?.features?.length || 0;
       while (position?.coords.latitude === undefined || position?.coords.longitude === undefined){
         await getLocation();
