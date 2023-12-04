@@ -27,7 +27,10 @@ export const DetailsPage: FC<DetailsPageProps> = ({match}) => {
           </h1>
           <SaveIcon className="inline-block"/>
         </div>
-        <img src={placeData?.photo} />
+        <img 
+          src={placeData?.photo}
+          className="h-72 rounded-xl"
+        />
         <div className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
           h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
           <button
