@@ -82,44 +82,56 @@ const DivScroller = () => {
       setPlaceType('all')
       console.log('set to all places')
     }else {
+      counter = 0;
       setPlaceType('cafes')
+      console.log('set to cafe');
       clearItems();
       placeData = cafesData;
+      fetchMore();
     }
-  }, [placeType])
+  }, [])
 
   const handleRestaurantFilter = useCallback(() => {
     if (placeType === 'restaurants'){
       setPlaceType('all')
       console.log('set to all places')
     }else {
+      counter = 0;
       setPlaceType('restaurants');
+      console.log('set to restaurants');
       clearItems();
       placeData = restaurantsData;
+      fetchMore();
     }
-  }, [placeType])
+  }, [])
 
   const handleBarFilter = useCallback(() => {
     if (placeType === 'bars'){
       setPlaceType('all')
       console.log('set to all places')
     }else {
+      counter = 0;
       setPlaceType('bars')
+      console.log('set to bar');
       clearItems();
       placeData = barsData;
+      fetchMore();
     }
-  }, [placeType])
+  }, [])
 
   const handleParkFilter = useCallback(() => {
     if (placeType === 'parks'){
       setPlaceType('all')
       console.log('set to all places')
     }else {
+      counter = 0;
       setPlaceType('parks')
+      console.log('set to park');
       clearItems();
       placeData = parksData;
+      fetchMore();
     }
-  }, [placeType])
+  }, [])
   
 
   const renderRatingStars = (rating: number) => {
@@ -173,7 +185,7 @@ const DivScroller = () => {
         await getLocation();
       }
         for (let i = counter; i < counter + 10 && i < totalFeatures; i++) {
-          console.log(placeData)
+          console.log(i, placeData)
           const placeName = (placeData?.features[i].properties?.name || 'Unknown Name');
           const placeType = (placeData?.features[i].properties?.type || 'Unknown Type');
           const placeImage = (placeData?.features[i].properties?.photo || 'Unknown Type');
