@@ -191,8 +191,9 @@ const DivScroller = () => {
           const placeType = (placeData?.features[i].properties?.type || 'Unknown Type');
           const placeImage = (placeData?.features[i].properties?.photo || 'Unknown Type');
           const placeRate = (placeData?.features[i].properties?.rating || 'Unknown Type');
-
+          // @ts-ignore
           const latitude = (placeData?.features[i].geometry?.coordinates[1] || 'Unknown Type');
+          // @ts-ignore
           const longitude = (placeData?.features[i].geometry?.coordinates[0] || 'Unknown Type');
           
           const dist = distance(position?.coords.latitude, position?.coords.longitude, latitude, longitude);

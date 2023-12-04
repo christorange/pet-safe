@@ -19,6 +19,7 @@ interface Props {
   getScrollParent?: () => HTMLElement // 获取 parentElement 的回调
   useWindow?: boolean // 是否以 window 作为 scrollEl
   useCapture?: boolean // 是否注册为捕获事件
+  children: any
 }
 
 class InfiniteScroll extends Component<Props, any> {

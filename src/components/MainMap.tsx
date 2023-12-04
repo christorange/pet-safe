@@ -22,12 +22,12 @@ interface IPopupInfo {
   longitude: number;
   name: string;
   type: string;
+  id: string;
 }
 
 const MainMap: FC = () => {
   
   const history = useHistory();
-
 
   const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all')
   const [popupInfo, setPopupInfo] = useState<IPopupInfo | null>(null)
@@ -135,7 +135,8 @@ const MainMap: FC = () => {
       longitude: e.lngLat.lng,
       latitude: e.lngLat.lat,
       name: place?.properties?.name,
-      type: place?.properties?.type
+      type: place?.properties?.type,
+      id: place?.properties?.id
     })
     console.log(popupInfo)
   },[popupInfo])
@@ -365,7 +366,12 @@ const MainMap: FC = () => {
                       4.7/5.0
                     </p>
                   </div>
-                  <button className='btn-sm rounded-lg bg-brand2 text-text-100'>
+                  <button 
+                    className='btn-sm rounded-lg bg-brand2 text-text-100'
+                    onClick={() => {
+                      history.push('/details/' + popupInfo.id)
+                    }}
+                  >
                     OPEN
                   </button>
                 </motion.div>

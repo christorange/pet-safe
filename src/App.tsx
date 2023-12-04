@@ -64,6 +64,7 @@ const App: FC<RouteComponentProps> = () => (
                 <Route exact path="/distance">
                   <DivScroller />
                 </Route>
+                <Route path="/details/:id" component={DetailsPage} />
               </IonRouterOutlet>
             </IonReactRouter>
           </IonApp>

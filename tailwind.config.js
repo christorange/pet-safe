@@ -49,7 +49,7 @@ export default {
     require('@tailwindcss/forms')
   ],
   daisyui: {
-    themes: false,
+    themes: ["light"],
     styled: true,
     logs: false
   }
