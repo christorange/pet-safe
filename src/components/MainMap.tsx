@@ -23,6 +23,7 @@ interface IPopupInfo {
   name: string;
   type: string;
   id: string;
+  rating: string;
 }
 
 const MainMap: FC = () => {
@@ -136,7 +137,8 @@ const MainMap: FC = () => {
       latitude: e.lngLat.lat,
       name: place?.properties?.name,
       type: place?.properties?.type,
-      id: place?.properties?.id
+      id: place?.properties?.id,
+      rating: place?.properties?.rating
     })
     console.log(popupInfo)
   },[popupInfo])
@@ -363,7 +365,7 @@ const MainMap: FC = () => {
                       {popupInfo.type}
                     </p>
                     <p>
-                      4.7/5.0
+                      {popupInfo.rating}/5.0
                     </p>
                   </div>
                   <button 
