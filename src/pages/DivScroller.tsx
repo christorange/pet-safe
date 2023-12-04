@@ -23,6 +23,7 @@ let counter = 0
 
 const DivScroller = () => {
   const [items, setItems] = useState<string[]>([]);
+  const [newItems, setNewItems] = useState<ReactElement[]>([]); 
   const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all');
   const { data: allPlacesData, isLoading, isFetched } = trpc.places.allPlaces.useQuery();
   // Getting User's location
@@ -180,7 +181,7 @@ const DivScroller = () => {
 
   const fetchMore = async () => {
     await delay(async () => {
-      const newItems: ReactElement[]  = [];
+      setNewItems([]);
       const totalFeatures = placeData?.features?.length || 0;
       while (position?.coords.latitude === undefined || position?.coords.longitude === undefined){
         await getLocation();
@@ -214,6 +215,7 @@ const DivScroller = () => {
         </div> )
         
       }
+      // @ts-ignore
       setItems(prevItems => [...prevItems, ...newItems]);
 
       counter += 10
