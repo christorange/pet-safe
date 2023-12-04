@@ -7,11 +7,15 @@ import {
   IonRouterOutlet,
   setupIonicReact
 } from '@ionic/react';
+import { FC } from 'react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 import MainScreen from './pages/MainScreen';
 import Tab2 from './pages/Tab2';
 import UserProfile from './pages/UserProfile';
+import DivScroller from './pages/DivScroller'
+import { DetailsPage } from './pages/DetailsPage';
+import { RouteComponentProps } from 'react-router-dom';
 
 import './styles/global.css';
 
@@ -36,7 +40,7 @@ import './styles/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
+const App: FC<RouteComponentProps> = () => (
   <>
     <trpc.Provider client={trpcClient} queryClient={reactQueryClient}>
       <QueryClientProvider client={reactQueryClient}>
@@ -57,6 +61,10 @@ const App: React.FC = () => (
                     <UserProfile />
                   </SignedIn>
                 </Route>
+                <Route exact path="/distance">
+                  <DivScroller />
+                </Route>
+                <Route path="/details/:id" component={DetailsPage} />
               </IonRouterOutlet>
             </IonReactRouter>
           </IonApp>

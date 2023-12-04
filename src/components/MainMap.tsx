@@ -3,6 +3,7 @@ import { FC, useRef, useCallback, useState } from 'react';
 import { trpc } from '../api';
 import { SymbolLayer, MapRef, Popup, MapLayerMouseEvent } from 'react-map-gl';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useHistory } from 'react-router-dom';
 import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/clerk-react';
 
 import { BarIcon } from '@/assets/icons/BarIcon';
@@ -21,10 +22,14 @@ interface IPopupInfo {
   longitude: number;
   name: string;
   type: string;
+  id: string;
+  rating: string;
 }
 
 const MainMap: FC = () => {
   
+  const history = useHistory();
+
   const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all')
   const [popupInfo, setPopupInfo] = useState<IPopupInfo | null>(null)
   const [showFilter, setShowFilter] = useState<boolean>(false)
@@ -131,7 +136,9 @@ const MainMap: FC = () => {
       longitude: e.lngLat.lng,
       latitude: e.lngLat.lat,
       name: place?.properties?.name,
-      type: place?.properties?.type
+      type: place?.properties?.type,
+      id: place?.properties?.id,
+      rating: place?.properties?.rating
     })
     console.log(popupInfo)
   },[popupInfo])
@@ -358,10 +365,15 @@ const MainMap: FC = () => {
                       {popupInfo.type}
                     </p>
                     <p>
-                      4.7/5.0
+                      {popupInfo.rating}/5.0
                     </p>
                   </div>
-                  <button className='btn-sm rounded-lg bg-brand2 text-text-100'>
+                  <button 
+                    className='btn-sm rounded-lg bg-brand2 text-text-100'
+                    onClick={() => {
+                      history.push('/details/' + popupInfo.id)
+                    }}
+                  >
                     OPEN
                   </button>
                 </motion.div>
@@ -375,6 +387,10 @@ const MainMap: FC = () => {
           <button
             className='grid place-items-center
             active:scale-125 transition ease-in-out duration-200'
+            onClick={() => {
+              history.push('/distance');
+              history.go(0);
+            }}
           >
             <HeartICon strokeWidth='1.8'/>
           </button>
