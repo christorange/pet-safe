@@ -8,7 +8,6 @@ import {
   useClerk
 } from "@clerk/clerk-react";
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import { trpc } from '../api';
 import { useEffect } from 'react';
 import '../styles/ppage.css'
