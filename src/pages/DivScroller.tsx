@@ -15,8 +15,9 @@ import { HalfStar } from '@/assets/icons/halfStar';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-import Fragment from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { HomeIcon } from "@/assets/icons/HomeIcon"
+
 
 let counter = 0
 
@@ -254,6 +255,12 @@ const DivScroller = () => {
 
   return (
     <IonPage>
+      <button className="grid place-items-center
+              active:scale-125 transition ease-in-out duration-200  bg-brand-100" onClick={() => { 
+            history.push('/')
+            history.go(0)
+          }}><HomeIcon /></button>
+
       <div className="filter1 active:scale-125 transition">
       <button onClick={handleRestaurantFilter}><Restaurant /></button>
     </div>
