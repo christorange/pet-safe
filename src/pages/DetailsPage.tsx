@@ -6,7 +6,9 @@ import { HeartICon } from "@/assets/icons/HeartIcon"
 import { UserIcon } from "@/assets/icons/UserIcon"
 import { SaveIcon } from "@/assets/icons/SaveIcon"
 import { HomeIcon } from "@/assets/icons/HomeIcon"
-import { UserButton, SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react"
+import { UserButton, SignedIn, SignedOut, SignInButton, useUser,
+  useAuth,
+  useClerk } from "@clerk/clerk-react"
 interface DetailsPageProps 
   extends RouteComponentProps<{
     id: string
@@ -17,6 +19,27 @@ export const DetailsPage: FC<DetailsPageProps> = ({match}) => {
   const { data: placeData } = trpc.places.onePlace.useQuery(match.params.id)
   const history = useHistory();
 
+  const { isLoaded, isSignedIn, user } = useUser();
+  const { userId, sessionId, getToken } = useAuth();
+  
+  const createSavedMutation = trpc.saved.saveOne.useMutation();
+
+  const handleSave = async () => {
+    try {
+      const userID = userId;
+      const placeId = match.params.id;
+      if (!userID) return;
+      console.log(userID, placeId);
+      await createSavedMutation.mutateAsync({
+        user_id: userID || '{}',
+        place_id: placeId
+      });
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (placeData){
     return (
       <IonPage>
@@ -25,7 +48,8 @@ export const DetailsPage: FC<DetailsPageProps> = ({match}) => {
             <p className="text-4xl font-extrabold text-brand2">
               {placeData?.name}
             </p>
-            <SaveIcon/>
+            <SaveIcon className="active:scale-125 transition"
+            onClick={handleSave}/>
           </div>
           <img 
             src={placeData?.photo}
