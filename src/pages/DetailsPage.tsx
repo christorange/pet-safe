@@ -77,8 +77,8 @@ export const DetailsPage: FC<DetailsPageProps> = ({match}) => {
               className='grid place-items-center
               active:scale-125 transition ease-in-out duration-200'
               onClick={() => {
-                history.push('/distance');
-                history.go(0);
+                history.push('/saved');
+              history.go(0);
               }}
             >
               <HeartICon strokeWidth='1.8'/>
