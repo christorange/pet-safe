@@ -10,7 +10,7 @@ import { UserButton, SignedIn, SignedOut, SignInButton, useUser,
   useAuth,
   useClerk } from "@clerk/clerk-react"
 interface DetailsPageProps 
-  extends RouteComponentProps<{
+  extends RouteComponentProps<{ 
     id: string
   }> {}
 
