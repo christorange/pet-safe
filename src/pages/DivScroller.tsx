@@ -15,13 +15,16 @@ import { HalfStar } from '@/assets/icons/halfStar';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-import Fragment from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { HomeIcon } from "@/assets/icons/HomeIcon"
+
 
 let counter = 0
 
 
-
 const DivScroller = () => {
+  const history = useHistory();
+
   const [items, setItems] = useState<string[]>([]);
   const [newItems, setNewItems] = useState<ReactElement[]>([]); 
   const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all');
@@ -199,16 +202,22 @@ const DivScroller = () => {
           
           const dist = distance(position?.coords.latitude, position?.coords.longitude, latitude, longitude);
 
+
           placeData && newItems.push(
           <div className="card w-96 card-compact  --ion-color-success shadow-xl border-8 border-white">
           <figure><img src={placeImage} alt="Can't load" /></figure>
-          <div className="card-body" >
+          <div className="card-body bg-brand-100" >
             <h2 className="card-title">{placeName}</h2>
             <p>{placeType}</p>
             <h2 className="card-title">{renderRatingStars(placeRate)}</h2>
             <div className="card-actions justify-end">
               <h2>{dist.toPrecision(2)}km</h2>
-              <button><Arrow/></button>
+              <button
+              onClick={() => {
+                history.push('/details/' + placeData?.features[i].properties?.id)
+              }}>
+                <Arrow/>
+              </button>
   
             </div>
             </div>
@@ -246,6 +255,12 @@ const DivScroller = () => {
 
   return (
     <IonPage>
+      <button className="grid place-items-center
+              active:scale-125 transition ease-in-out duration-200  bg-brand-100" onClick={() => { 
+            history.push('/')
+            history.go(0)
+          }}><HomeIcon /></button>
+
       <div className="filter1 active:scale-125 transition">
       <button onClick={handleRestaurantFilter}><Restaurant /></button>
     </div>

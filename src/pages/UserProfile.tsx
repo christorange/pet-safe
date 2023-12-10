@@ -10,7 +10,6 @@ import {
 import { useHistory } from 'react-router';
 import { trpc } from '../api';
 import { useEffect } from 'react';
-import '../styles/ppage.css'
 
 const UserProfile: React.FC = () => {
 

@@ -388,7 +388,7 @@ const MainMap: FC = () => {
             className='grid place-items-center
             active:scale-125 transition ease-in-out duration-200'
             onClick={() => {
-              history.push('/distance');
+              history.push('/saved');
               history.go(0);
             }}
           >

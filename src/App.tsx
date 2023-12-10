@@ -14,6 +14,7 @@ import MainScreen from './pages/MainScreen';
 import Tab2 from './pages/Tab2';
 import UserProfile from './pages/UserProfile';
 import DivScroller from './pages/DivScroller'
+import SavedPage from './pages/savedPage';
 import { DetailsPage } from './pages/DetailsPage';
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -63,6 +64,9 @@ const App = () => (
                 </Route>
                 <Route exact path="/distance">
                   <DivScroller />
+                </Route>
+                <Route exact path="/saved">
+                  <SavedPage />
                 </Route>
                 <Route path="/details/:id" component={DetailsPage} />
               </IonRouterOutlet>
