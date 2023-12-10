@@ -41,7 +41,7 @@ import './styles/variables.css';
 
 setupIonicReact();
 
-const App: FC<RouteComponentProps> = () => (
+const App = () => (
   <>
     <trpc.Provider client={trpcClient} queryClient={reactQueryClient}>
       <QueryClientProvider client={reactQueryClient}>
