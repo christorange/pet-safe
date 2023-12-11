@@ -10,6 +10,7 @@ import { BarIcon } from '@/assets/icons/BarIcon';
 import { RestaurantIcon } from '@/assets/icons/RestaurantIcon';
 import { CafeIcon } from '@/assets/icons/CafeIcon';
 import { ParkIcon } from '@/assets/icons/ParkIcon';
+import { HotelIcon } from '@/assets/icons/HotelIcon';
 import { HeartICon } from '@/assets/icons/HeartIcon';
 import { UserIcon } from '@/assets/icons/UserIcon';
 import { FilterIcon } from '@/assets/icons/FilterIcon';
@@ -30,7 +31,7 @@ const MainMap: FC = () => {
   
   const history = useHistory();
 
-  const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks'>('all')
+  const [placeType, setPlaceType] = useState<'all' | 'bars' | 'restaurants' | 'cafes' | 'parks' | 'hotels'>('all')
   const [popupInfo, setPopupInfo] = useState<IPopupInfo | null>(null)
   const [showFilter, setShowFilter] = useState<boolean>(false)
 
@@ -66,6 +67,14 @@ const MainMap: FC = () => {
     }
   }, [placeType])
 
+  const handlehotelFilter = useCallback(() => {
+    if (placeType === 'hotels'){
+      setPlaceType('all')
+    }else {
+      setPlaceType('hotels')
+    }
+  }, [placeType])
+
   const toggleShowFilter = useCallback(() => {
     setShowFilter((prev) => !prev)
   }, [])
@@ -90,6 +99,11 @@ const MainMap: FC = () => {
     data: parksData, 
     isLoading: isParksLoading
   } = trpc.places.parks.useQuery()
+
+  const {
+    data: hotelsData,
+    isLoading: isHotelsLoading
+  } = trpc.places.hotels.useQuery()
 
   const mapRef = useRef<MapRef | null>(null);
 
@@ -219,6 +233,21 @@ const MainMap: FC = () => {
     source: 'parks',
     interactive: true
   }
+
+  const hotelLayer: SymbolLayer = {
+    id: 'hotelLayer',
+    type: 'symbol',
+    layout: {
+      'icon-image': 'hotelIcon',
+      'icon-size': 0.7,
+      'icon-allow-overlap': true,
+      'text-field': '{name}',
+      'text-size': 11,
+      'text-offset': [0, 2.5]
+    },
+    source: 'hotels',
+    interactive: true
+  }
   
 
   return(
@@ -298,6 +327,16 @@ const MainMap: FC = () => {
                   className='active:scale-125 transition'
                 />
               </motion.div>
+              <motion.div
+                initial={{scale:0}}
+                animate={{scale:1}}
+                exit={{scale:0}}
+              >
+                <HotelIcon 
+                  onClick={handlehotelFilter} 
+                  className='active:scale-125 transition'
+                />
+              </motion.div>
             </div>
           }
         </AnimatePresence>
@@ -346,6 +385,16 @@ const MainMap: FC = () => {
             data={parksData}
           >
             <Layer {...parkLayer} />
+          </Source>
+        }
+        {
+          hotelsData && (placeType === 'all' || placeType === 'hotels') &&
+          <Source
+            id='hotels'
+            type='geojson'
+            data={hotelsData}
+          >
+            <Layer {...hotelLayer} />
           </Source>
         }
         <AnimatePresence>
