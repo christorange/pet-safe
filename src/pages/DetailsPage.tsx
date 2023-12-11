@@ -45,12 +45,12 @@ export const DetailsPage: FC<DetailsPageProps> = ({match}) => {
   if (placeData){
     return (
       <IonPage>
-        <div className="flex flex-col items-center bg-white pt-8 pb-16 !gap-0 h-full px-6">
-          <div className="flex items-center gap-4 mb-6">
-            <p className="text-4xl font-extrabold text-brand2 mt-12">
+        <div className="flex flex-col items-center bg-white pt-8 pb-16 !gap-0 h-full px-6 overflow-y-scroll">
+          <div className="flex items-center gap-2 mb-6 mt-12 ">
+            <p className="text-3xl font-bold text-brand2 font-title">
               {placeData?.name}
             </p>
-            <SaveIcon className="active:scale-125 transition"
+            <SaveIcon className="active:scale-125 transition w-[50px]"
             onClick={handleSave}/>
           </div>
           <img 
@@ -65,16 +65,39 @@ export const DetailsPage: FC<DetailsPageProps> = ({match}) => {
               {placeData?.rating}/5.0
             </div>
           </div>
-          <div className="flex gap-4 self-start text-xl font-bold ml-2">
-            <p className="text-brand-200">
-              OPEN
-            </p>
+          <section className="flex gap-4 self-start text-xl font-bold ml-2 mb-7">
+            {statusdata?.isOpen?
+              <p className="text-brand-200">
+                OPEN NOW
+              </p> :
+              <p className="text-error-200">
+                CLOSED NOW
+              </p>
+            }
             <p>
-              8:00 AM - 11:00 PM
+              8:00 am - 11:00 pm
             </p>
-          </div>
-          <div className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
-            h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
+          </section>
+          <section className="w-full border border-brand2-200 bg-brand2-100 rounded-xl px-5 py-3 mb-3">
+            <p className="font-bold inline">Address: </p>
+            <p className="inline">{placeData?.address}</p>
+            {
+              placeData?.phone &&
+              <div className="mt-3">
+                <p className="font-bold inline">Phone: </p>
+                <p className="inline">{placeData.phone}</p>
+              </div>
+            }
+          </section>
+          {placeData?.summary &&
+            <section className="w-full border border-brand2-200 bg-brand2-100 rounded-xl px-5 py-3 mb-3">
+              <p className="font-bold inline">Summary: </p>
+              <p className="inline">{placeData.summary}</p>
+            </section>
+          }
+
+          <div className='absolute bottom-0 w-full flex items-center justify-center gap-20 bg-brand-100 
+            h-12 text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
             <button
               className='grid place-items-center
               active:scale-125 transition ease-in-out duration-200'
