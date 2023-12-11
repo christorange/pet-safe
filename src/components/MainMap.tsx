@@ -124,6 +124,13 @@ const MainMap: FC = () => {
           map.addImage('parkIcon', image, {sdf: false});
         })
       }
+
+      if (!map.hasImage('hotelIcon')){
+        map.loadImage('https://christorange.github.io/pet-safe/src/assets/hotel-icon.png', (error, image) => {
+          if (error || !image) throw error;
+          map.addImage('hotelIcon', image, {sdf: false});
+        })
+      }
       
     }
   },[])
