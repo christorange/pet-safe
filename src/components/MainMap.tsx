@@ -268,7 +268,7 @@ const MainMap: FC = () => {
         ref={mapRef}
         onLoad={()=>mapOnLoad()}
         onClick={mapOnClick}
-        interactiveLayerIds={['barLayer', 'restaurantLayer', 'cafeLayer', 'parkLayer']}
+        interactiveLayerIds={['barLayer', 'restaurantLayer', 'cafeLayer', 'parkLayer', 'hotelLayer']}
       >
         <div className='relative top-16 mx-5 text-text margi'>
           <input
