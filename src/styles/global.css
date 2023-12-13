@@ -24,3 +24,11 @@ body{
 .mapboxgl-popup-tip{
   display: none;
 }
+
+_::-webkit-full-page-media, _:future, :root .main-bottom-bar {
+  top: 72%;
+}
+
+_::-webkit-full-page-media, _:future, :root .filter-icons {
+  bottom: 200px;
+}

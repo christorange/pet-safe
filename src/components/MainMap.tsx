@@ -271,11 +271,11 @@ const MainMap: FC = () => {
         onClick={mapOnClick}
         interactiveLayerIds={['barLayer', 'restaurantLayer', 'cafeLayer', 'parkLayer', 'hotelLayer']}
       >
-        <div className='relative top-16 mx-5 text-text margi'>
+        <div className='relative top-16 mx-5 text-text'>
           <input
             type='text'
             placeholder='Search for pet friendly places'
-            className='accent-brand-200 w-full rounded-full bg-brand border-brand-200 border-2 border-opacity-30 
+            className='accent-brand-200 w-full max-w-2xl rounded-full bg-brand border-brand-200 border-2 border-opacity-30 
               focus:shadow-2xl focus:ring-0 focus:border-brand-200 focus:border-opacity-70 py-2.5 ps-12 transition-all '
           />
           <button type='button' className='absolute inset-y-0 start-0 text-text w-12 place-content-center grid'>
@@ -287,7 +287,7 @@ const MainMap: FC = () => {
         
         <AnimatePresence>
           {showFilter &&
-            <div className='absolute right-8 bottom-36 flex flex-col gap-2'>
+            <div className='absolute right-8 bottom-36 flex flex-col gap-2 filter-icons'>
               <motion.div
                 initial={{scale:0}}
                 animate={{scale:1}}
@@ -439,8 +439,9 @@ const MainMap: FC = () => {
         </AnimatePresence>
 
         {/* bottom bar */}
-        <div className='absolute bottom-20 left-[20%] w-[70vw] flex items-center justify-center gap-10 bg-brand-100 
-          h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
+        <div className='relative top-[82%] left-[14%] w-[70vw] max-w-lg flex items-center justify-center gap-10 bg-brand-100 
+          py-4 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30 main-bottom-bar'
+        >
           <button
             className='grid place-items-center
             active:scale-125 transition ease-in-out duration-200'
