@@ -14,98 +14,68 @@ import {
   import {Star} from '../assets/icons/Star';
   import { HalfStar } from '@/assets/icons/halfStar';
 
-const SavedPage: React.FC = () => {
-    
+  const SavedPage: React.FC = () => {
     const history = useHistory();
     const { isLoaded, isSignedIn, user } = useUser();
     const { userId, sessionId, getToken } = useAuth();
-    const [items, setItems] = useState<string[]>([]);
-    const [newItems, setNewItems] = useState<ReactElement[]>([]); 
-
-    if (!isLoaded || !userId || !user) {
-        return <div>
-            <h1 className=' bg-brand-100'>You have to log in to see Your saved places</h1>
-            <button className="bg-transparent bg-brand-100 text-black font-semibold border-blue-500 hover:border-transparent rounded"
-            onClick={() => { 
-                history.push('/')
-                history.go(0)
-              }}>
-            Back Home
-            </button>
-            </div>;
-        
+     // @ts-ignore
+    const { data: savedData } = trpc.saved.getByUserId.useQuery(userId);
+    const { data: placeData } = trpc.places.manyPlaces.useQuery(savedData?.map(item => item.place_id) || []);
+  
+    const [items, setItems] = useState<ReactElement[]>([]);
+  
+    useEffect(() => {
+      if (!isLoaded || !userId || !savedData || !placeData) {
+        return;
       }
-      let placeData: Object[] | null = null; // Define placeData as a global variable
-
-        const { data: savedData } = trpc.saved.getByUserId.useQuery(userId);
-
-        if (savedData) {
-        const ids = savedData.map(item => item.place_id);
-
-        const queryResult = trpc.places.manyPlaces.useQuery(ids);
-        placeData = queryResult.data || null; // Update placeData based on the query result
-        } else {
-        console.error("No valid data received for savedData");
-        }
-
-       
-      const fetchMore = async () => {
-        await delay(async () => {
-            const updatedNewItems: ReactElement[] = [];
-          const totalFeatures = savedData?.length || 0;
-            if (totalFeatures > 0 && savedData && placeData) {
-            for (let i = 0; i < totalFeatures; i++) {
-                // @ts-ignore
-                const placeName = (placeData[i].name || 'Unknown Name');
-                // @ts-ignore
-                const placeType = (placeData[i].type || 'Unknown Type');
-                // @ts-ignore
-                const placeImage = (placeData[i].photo || 'Unknown Type');
-                // @ts-ignore
-                const placeRate = (placeData[i].rating || 'Unknown Type');
-              
-                placeData && updatedNewItems.push(
-              <div className="card w-96 card-compact  --ion-color-success shadow-xl border-8 border-white">
+  
+      const updatedNewItems: ReactElement[] = [];
+  
+      for (let i = 0; i < savedData.length; i++) {
+        const place = placeData[i];
+  
+        if (place) {
+          const placeName = place.name || 'Unknown Name';
+          const placeType = place.type || 'Unknown Type';
+          const placeImage = place.photo || 'Unknown Type';
+          const placeRate = place.rating || 'Unknown Type';
+  
+          updatedNewItems.push(
+            <div key={i} className="card w-96 card-compact --ion-color-success shadow-xl border-8 border-white">
               <figure><img src={placeImage} alt="Can't load" /></figure>
-              <div className="card-body bg-brand-100" >
+              <div className="card-body bg-brand-100">
                 <h2 className="card-title">{placeName}</h2>
                 <p>{placeType}</p>
                 <div className="card-actions justify-end">
-                  <button
-                  onClick={() => {
-                    history.push('/details/' + savedData[i].place_id)
-                  }}>
-                    <Arrow/>
+                  <button onClick={() => history.push(`/details/${savedData[i].place_id}`)}>
+                    <Arrow />
                   </button>
-      
                 </div>
-                </div>
-            </div> )
-            
-          }}
-          // @ts-ignore
-          setItems(updatedNewItems);
-    
-        })
+              </div>
+            </div>
+          );
+        }
       }
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-              await fetchMore().then(res => {
-                console.log(res);
-              }).catch(e => {
-                console.log(e);
-                return
-              })   
-            
-          } catch (e) {
-            console.log(e);
-          }
-        };
-        
-        fetchData();
-      }, [])
+  
+      setItems(updatedNewItems);
+    }, [isLoaded, userId, savedData, placeData, history]);
+  
+    if (!isLoaded || !userId) {
+      return (
+        <div>
+          <h1 className='bg-brand-100'>You have to log in to see Your saved places</h1>
+          <button
+            className="bg-transparent bg-brand-100 text-black font-semibold border-blue-500 hover:border-transparent rounded"
+            onClick={() => {
+              history.push('/');
+              history.go(0);
+            }}
+          >
+            Back Home
+          </button>
+        </div>
+      );
+    }
 
   return (
     <>
@@ -127,7 +97,8 @@ const SavedPage: React.FC = () => {
   
     </div>
     <div style={{right: 0,height: 802, width: 393,overflow: 'auto'}}>
-        {items.map(item => <div key={item}>{item}</div>)}
+   
+        {items.map(item => <div>{item}</div>)}
     </div>
 
     </div>
