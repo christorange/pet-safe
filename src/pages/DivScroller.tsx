@@ -254,7 +254,7 @@ const DivScroller = () => {
   
 
   return (
-    <IonPage>
+    <IonPage className='bg-white'>
       <button className="grid place-items-center
               active:scale-125 transition ease-in-out duration-200  bg-brand-100" onClick={() => { 
             history.push('/')
