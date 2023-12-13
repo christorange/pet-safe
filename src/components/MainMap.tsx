@@ -14,6 +14,7 @@ import { HotelIcon } from '@/assets/icons/HotelIcon';
 import { HeartICon } from '@/assets/icons/HeartIcon';
 import { UserIcon } from '@/assets/icons/UserIcon';
 import { FilterIcon } from '@/assets/icons/FilterIcon';
+import { GroupICon } from '@/assets/icons/Group';
 import {clsx} from 'clsx';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -438,7 +439,7 @@ const MainMap: FC = () => {
         </AnimatePresence>
 
         {/* bottom bar */}
-        <div className='absolute bottom-8 left-[20%] w-[60vw] flex items-center justify-center gap-10 bg-brand-100 
+        <div className='absolute bottom-8 left-[20%] w-[70vw] flex items-center justify-center gap-10 bg-brand-100 
           h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
           <button
             className='grid place-items-center
@@ -449,6 +450,16 @@ const MainMap: FC = () => {
             }}
           >
             <HeartICon strokeWidth='1.8'/>
+          </button>
+          <button
+            className='grid place-items-center
+            active:scale-125 transition ease-in-out duration-200'
+            onClick={() => {
+              history.push('/distance');
+              history.go(0);
+            }}
+          >
+            <GroupICon strokeWidth='1.8'/>
           </button>
           <SignedIn>
             <UserButton 
