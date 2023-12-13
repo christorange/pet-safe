@@ -14,6 +14,7 @@ import { HotelIcon } from '@/assets/icons/HotelIcon';
 import { HeartICon } from '@/assets/icons/HeartIcon';
 import { UserIcon } from '@/assets/icons/UserIcon';
 import { FilterIcon } from '@/assets/icons/FilterIcon';
+import { StoreIcon } from '@/assets/icons/StoreIcon';
 import { GroupICon } from '@/assets/icons/Group';
 import {clsx} from 'clsx';
 
@@ -446,21 +447,19 @@ const MainMap: FC = () => {
             className='grid place-items-center
             active:scale-125 transition ease-in-out duration-200'
             onClick={() => {
-              history.push('/saved');
-              history.go(0);
+              history.push('/distance');
             }}
           >
-            <HeartICon strokeWidth='1.8'/>
+            <StoreIcon strokeWidth='1.8'/>
           </button>
           <button
             className='grid place-items-center
             active:scale-125 transition ease-in-out duration-200'
             onClick={() => {
-              history.push('/distance');
-              history.go(0);
+              history.push('/saved');
             }}
           >
-            <GroupICon strokeWidth='1.8'/>
+            <HeartICon strokeWidth='1.8'/>
           </button>
           <SignedIn>
             <UserButton 
