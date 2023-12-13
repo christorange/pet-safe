@@ -469,7 +469,7 @@ const MainMap: FC = () => {
           </SignedIn>
           <SignedOut>
             <SignInButton
-              redirectUrl='/userprofile'
+              redirectUrl='/'
               mode='modal'
             >
               <button
