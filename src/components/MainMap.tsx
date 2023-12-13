@@ -440,7 +440,7 @@ const MainMap: FC = () => {
         </AnimatePresence>
 
         {/* bottom bar */}
-        <div className='relative top-[82%] left-[14%] w-[70vw] max-w-lg flex items-center justify-center gap-10 bg-brand-100 
+        <div className='absolute bottom-8 left-[14%] w-[70vw] max-w-lg flex items-center justify-center gap-10 bg-brand-100 
           py-4 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30 main-bottom-bar'
         >
           <button
