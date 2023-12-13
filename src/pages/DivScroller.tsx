@@ -12,7 +12,7 @@ import {Star} from '../assets/icons/Star';
 import logo from "../assets/park9.png";
 import { trpc } from '../api'; // fetching places
 import { HalfStar } from '@/assets/icons/halfStar';
-import { motion, AnimatePresence } from 'framer-motion';
+import { BottomBar } from '@/components/BottomBar';
 
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Link, useHistory } from 'react-router-dom';
@@ -204,9 +204,9 @@ const DivScroller = () => {
 
 
           placeData && newItems.push(
-          <div className="card w-96 card-compact my-4  --ion-color-success shadow-xl border-8 border-white">
+          <div className="card w-96 card-compact my-4 shadow-xl">
           <figure><img src={placeImage} alt="Can't load" /></figure>
-          <div className="card-body bg-brand-100" >
+          <div className="card-body rounded-b-2xl bg-brand-100" >
             <h2 className="card-title">{placeName}</h2>
             <p>{placeType}</p>
             <h2 className="card-title">{renderRatingStars(placeRate)}</h2>
@@ -254,16 +254,11 @@ const DivScroller = () => {
   
 
   return (
-    <IonPage className='bg-white'>
-      <button className="grid place-items-center
-              active:scale-125 transition ease-in-out duration-200  bg-brand-100" onClick={() => { 
-            history.push('/')
-            history.go(0)
-          }}><HomeIcon /></button>
+    <IonPage className='bg-white flex flex-col items-center'>
 
       <div className="filter1 active:scale-125 transition">
-      <button onClick={handleRestaurantFilter}><Restaurant /></button>
-    </div>
+        <button onClick={handleRestaurantFilter}><Restaurant /></button>
+      </div>
       <div className="filter2 active:scale-125 transition">
       <button onClick={handleCafeFilter}><Cafe/></button>
       
@@ -276,23 +271,22 @@ const DivScroller = () => {
       <button onClick={handleParkFilter}><Park/></button>
       
       </div>
-    
-    <div className = "shops">
-    <div className="card w-96 bg-base-100 shadow-xl">
-  
-</div>
-    <div style={{right: 0,height: 802, width: 393,overflow: 'auto'}}>
-      <InfiniteScroll
-        useWindow={false}
-        threshold={100}
-        loadMore={fetchMore}
-        loader={<span className="loading loading-bars loading-lg items-center"></span>}
-      >
-        {items.map(item => <div key={item}>{item}</div>)}
-      </InfiniteScroll>
-    </div>
+      
+      <div className = "shops">
+      <div className="card w-96 bg-base-100 shadow-xl"></div>
+      <div style={{right: 0,height: 802, width: 393,overflow: 'auto'}}>
+        <InfiniteScroll
+          useWindow={false}
+          threshold={100}
+          loadMore={fetchMore}
+          loader={<span className="loading loading-bars loading-lg items-center"></span>}
+        >
+          {items.map(item => <div key={item}>{item}</div>)}
+        </InfiniteScroll>
+      </div>
 
-    </div>
+      </div>
+      <BottomBar />
     
     </IonPage>
   )
