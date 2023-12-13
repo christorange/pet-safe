@@ -1,11 +1,12 @@
 import { RouteComponentProps, useHistory } from "react-router"
-import { FC } from "react"
-import { IonPage } from "@ionic/react"
+import { FC, useState } from "react"
+import { IonPage, IonToast } from "@ionic/react"
 import { trpc } from "../api"
 import { HeartICon } from "@/assets/icons/HeartIcon"
 import { UserIcon } from "@/assets/icons/UserIcon"
 import { SaveIcon } from "@/assets/icons/SaveIcon"
 import { HomeIcon } from "@/assets/icons/HomeIcon"
+import { StoreIcon } from "@/assets/icons/StoreIcon"
 import { UserButton, SignedIn, SignedOut, SignInButton, useUser,
   useAuth,
   useClerk } from "@clerk/clerk-react"
@@ -23,22 +24,27 @@ export const DetailsPage: FC<DetailsPageProps> = ({match}) => {
 
   const { isLoaded, isSignedIn, user } = useUser();
   const { userId, sessionId, getToken } = useAuth();
+  const [ showToast, setShowToast ] = useState(false);
   
   const createSavedMutation = trpc.saved.saveOne.useMutation();
 
   const handleSave = async () => {
-    try {
-      const userID = userId;
-      const placeId = match.params.id;
-      if (!userID) return;
-      console.log(userID, placeId);
-      await createSavedMutation.mutateAsync({
-        user_id: userID || '{}',
-        place_id: placeId
-      });
-      
-    } catch (error) {
-      console.log(error);
+    if (isSignedIn) {
+      try {
+        const userID = userId;
+        const placeId = match.params.id;
+        if (!userID) return;
+        console.log(userID, placeId);
+        await createSavedMutation.mutateAsync({
+          user_id: userID || '{}',
+          place_id: placeId
+        });
+        
+      } catch (error) {
+        console.error(error);
+      }
+    }else{
+      setShowToast(true);
     }
   };
 
@@ -74,11 +80,11 @@ export const DetailsPage: FC<DetailsPageProps> = ({match}) => {
                 CLOSED NOW
               </p>
             }
-            <p>
+            {/* <p>
               8:00 am - 11:00 pm
-            </p>
+            </p> */}
           </section>
-          <section className="w-full border border-brand2-200 bg-brand2-100 rounded-xl px-5 py-3 mb-3">
+          <section className="w-full border border-brand2-200 bg-brand2-100 rounded-xl px-5 py-3 mb-6">
             <p className="font-bold inline">Address: </p>
             <p className="inline">{placeData?.address}</p>
             {
@@ -96,14 +102,38 @@ export const DetailsPage: FC<DetailsPageProps> = ({match}) => {
             </section>
           }
 
-          <div className='absolute bottom-0 w-full flex items-center justify-center gap-20 bg-brand-100 
-            h-12 text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
+          <IonToast 
+            duration={3000}
+            message="Sign in to enable saving places"
+            isOpen={showToast}
+            onDidDismiss={() => setShowToast(false)}
+            color="danger"
+            position="bottom"
+            className="!mb-12"
+            buttons={[
+              {
+                text: 'Dismiss',
+                role: 'cancel',
+              }
+            ]}
+          />
+
+          <div className='absolute bottom-0 w-full flex items-center justify-center gap-12 bg-brand-100 
+            py-4 px-4 text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
+            <button
+              className='grid place-items-center
+              active:scale-125 transition ease-in-out duration-200'
+              onClick={() => {
+                history.push('/distance');
+              }}
+            >
+              <StoreIcon strokeWidth='1.8'/>
+            </button>
             <button
               className='grid place-items-center
               active:scale-125 transition ease-in-out duration-200'
               onClick={() => {
                 history.push('/saved');
-              history.go(0);
               }}
             >
               <HeartICon strokeWidth='1.8'/>
