@@ -204,9 +204,9 @@ const DivScroller = () => {
 
 
           placeData && newItems.push(
-          <div className="card w-96 card-compact my-4  --ion-color-success shadow-xl border-8 border-white">
+          <div className="card w-96 card-compact my-4 shadow-xl">
           <figure><img src={placeImage} alt="Can't load" /></figure>
-          <div className="card-body bg-brand-100" >
+          <div className="card-body rounded-b-2xl bg-brand-100" >
             <h2 className="card-title">{placeName}</h2>
             <p>{placeType}</p>
             <h2 className="card-title">{renderRatingStars(placeRate)}</h2>
