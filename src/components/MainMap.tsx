@@ -439,7 +439,7 @@ const MainMap: FC = () => {
         </AnimatePresence>
 
         {/* bottom bar */}
-        <div className='absolute bottom-8 left-[20%] w-[70vw] flex items-center justify-center gap-10 bg-brand-100 
+        <div className='absolute bottom-14 left-[20%] w-[70vw] flex items-center justify-center gap-10 bg-brand-100 
           h-16 rounded-full text-3xl text-brand-200 shadow-300 border-2 border-brand-200 border-opacity-30'>
           <button
             className='grid place-items-center
