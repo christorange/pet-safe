@@ -490,7 +490,7 @@ const MainMap: FC = () => {
             <FilterIcon strokeWidth='1.8'/>
           </button>
         </div>
-        <GeolocateControl position='bottom-left'/>
+        <GeolocateControl position='top-right'/>
       </Map>
     </>
   )
