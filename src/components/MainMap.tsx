@@ -287,7 +287,7 @@ const MainMap: FC = () => {
         
         <AnimatePresence>
           {showFilter &&
-            <div className='absolute right-8 bottom-24 flex flex-col gap-2'>
+            <div className='absolute right-8 bottom-36 flex flex-col gap-2'>
               <motion.div
                 initial={{scale:0}}
                 animate={{scale:1}}
