@@ -17,7 +17,7 @@ import { FilterIcon } from '@/assets/icons/FilterIcon';
 import { StoreIcon } from '@/assets/icons/StoreIcon';
 import { GroupICon } from '@/assets/icons/Group';
 import {clsx} from 'clsx';
-
+import { AddressAutofill, useConfirmAddress, config } from '@mapbox/search-js-react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface IPopupInfo {
@@ -252,6 +252,8 @@ const MainMap: FC = () => {
   }
   
 
+  
+
   return(
     <>
       <Map
@@ -272,8 +274,9 @@ const MainMap: FC = () => {
         onClick={mapOnClick}
         interactiveLayerIds={['barLayer', 'restaurantLayer', 'cafeLayer', 'parkLayer', 'hotelLayer']}
       >
-        <div className='relative top-16 mx-5 text-text'>
+        {/* <div className='relative top-16 mx-5 text-text'>
           <input
+            id='mapbox-autofill'
             type='text'
             placeholder='Search for pet friendly places'
             className='accent-brand-200 w-full max-w-2xl rounded-full bg-brand border-brand-200 border-2 border-opacity-30 
@@ -284,7 +287,7 @@ const MainMap: FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
           </button>
-        </div>
+        </div> */}
         
         <AnimatePresence>
           {showFilter &&
